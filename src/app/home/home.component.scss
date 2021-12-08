@@ -1,0 +1,50 @@
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+.home-container {
+    height: 100%;
+    width: 100%;
+    background-color: lightskyblue;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: fit-content;
+    background-color: black;
+    color: white;
+    padding: 13%;
+    width: 100%;
+
+    &.second {
+        background-color: blue;
+    }
+}
+
+// Currently no styles as dont have real content in here
+// .content-one {
+
+// }
+
+// .content-two {
+
+// }
+
+// Breakpoint specific styles
+// Phone
+@media (max-width: #{$tablet-width - 1px}) {
+	.content-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+// Currently no laptop/tablet specific styles
+
+// @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+// }
+
+// @media (min-width: #{$desktop-width}) {
+// }

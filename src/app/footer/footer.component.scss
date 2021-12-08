@@ -1,0 +1,33 @@
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+.footer-container {
+    width: 100%;
+    height: fit-content;
+    background-color: lightgrey;
+}
+
+.footer-content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 4% 13%;
+}
+
+// No styles yet as have no real content to put in
+// .footer-one {
+
+// }
+
+// .footer-two {
+
+// }
+
+// Phone
+@media (max-width: #{$tablet-width - 1px}) {
+	.footer-content-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
