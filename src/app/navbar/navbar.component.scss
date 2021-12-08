@@ -1,0 +1,90 @@
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+// Main navbar styles
+.navbar-container {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+	background-color: white;
+}
+
+.menu-container {
+  position: relative;
+}
+
+.small-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+	width: 100vw;
+}
+
+.large-menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: $desktop-width;
+}
+
+.logo-container {
+	display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+}
+
+.account-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navbar-options {
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 60%;
+
+  .navbar-option {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+// Breakpoint specific styles
+@media (max-width: #{$tablet-width - 1px}) {
+	.large-menu {
+		display: none;
+	}
+}
+
+@media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+	.large-menu {
+		display: none;
+	}
+}
+
+@media (min-width: #{$desktop-width}) {
+  .menu-icon {
+    display: none;
+  }
+
+  .small-menu {
+	  display: none;
+  }
+}
