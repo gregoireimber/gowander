@@ -2,17 +2,20 @@
 $tablet-width: 768px;
 $desktop-width: 1024px;
 
+// Need to find a way to pin the footer to the very bottom of the actual application, not the bottom of the screen
 .footer-container {
-    width: 100%;
-    height: fit-content;
-    background-color: lightgrey;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: fit-content;
+  background-color: lightgrey;
 }
 
 .footer-content-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 4% 13%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 4% 13%;
 }
 
 // No styles yet as have no real content to put in
@@ -26,8 +29,8 @@ $desktop-width: 1024px;
 
 // Phone
 @media (max-width: #{$tablet-width - 1px}) {
-	.footer-content-container {
-        flex-direction: column;
-        text-align: center;
-    }
+  .footer-content-container {
+    flex-direction: column;
+    text-align: center;
+  }
 }
