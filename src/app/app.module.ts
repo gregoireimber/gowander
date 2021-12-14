@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { environment } from 'src/environments/environment';
+
+// Firebase Imports
+import * as firebase from 'firebase/app';
 
 // Angular material imports
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,32 +21,18 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './login/login.component';
 
-
-// Firebase Imports
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBRbVg7lrjZ_e8pLbMIXH8cEySqXBWN1wE",
-  authDomain: "gowander-1e179.firebaseapp.com",
-  projectId: "gowander-1e179",
-  storageBucket: "gowander-1e179.appspot.com",
-  messagingSenderId: "196910161498",
-  appId: "1:196910161498:web:a7b49ee2284c07a44ec263",
-  measurementId: "${config.measurementId}"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Service imports 
+import { FirebaseService } from './services/firebase.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,9 +43,14 @@ const analytics = getAnalytics(app);
     MatRippleModule,
     MatButtonModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [FirebaseService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private fbService: FirebaseService){
+    this.fbService.initializeFirebase();
+  }
+  
+}
