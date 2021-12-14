@@ -1,56 +1,74 @@
-import { Component, OnInit } from '@angular/core';
-
-import { firebase, firebaseui, FirebaseUIModule } from 'firebaseui-angular';
-import { FirebaseService } from '../services/firebase.service';
-
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  constructor(private fbService: FirebaseService) {}
+export class LoginComponent implements OnInit, OnChanges, OnDestroy {
+  // Add some password validators - e.g min length and the need for a number or a special symbol to make the app more secure
+  // Will also need to change the relatice error messgaes with hints as to how to make the password pass the checks
+  passwordFormControl = new FormControl('', [Validators.required]);
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  private email: string = '';
+  private password: string = '';
+  public emailSubscription: Subscription;
+  public passwordSubscription: Subscription;
+  public loading = false;
+  public isLogin = true;
+
+  constructor(private authService: AuthService, private router: Router) {
+    this.emailSubscription = this.emailFormControl.valueChanges.subscribe(
+      (email: string) => {
+        this.email = email;
+      }
+    );
+    this.passwordSubscription = this.passwordFormControl.valueChanges.subscribe(
+      (password: string) => {
+        this.password = password;
+      }
+    );
+  }
 
   ngOnInit(): void {
-    this.fbService.initializeFirebase().then(() => {
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    this.isLogin = this.authService.isLogin;
+  }
 
-      ui.start('#firebaseui-auth-container', {
-        signInOptions: [
-          {
-            provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-            requireDisplayName: false,
-          },
-        ],
+  ngOnChanges(): void {
+    this.isLogin = this.authService.isLogin;
+  }
+
+  public onSwitchToSignUp(): void {
+    this.authService.isLogin = false;
+    this.router.navigateByUrl('/signup');
+  }
+
+  public onSwitchToLogIn(): void {
+    this.authService.isLogin = true;
+    this.router.navigateByUrl('/login');
+  }
+
+  public onLogIn(): void {
+    this.loading = true;
+    this.authService
+      .emailLogin(this.email.trim(), this.password.trim())
+      .then(() => {
+        this.loading = false;
+      })
+      .catch((error) => {
+        console.log('error');
       });
-      
-      var uiConfig = {
-        callbacks: {
-          signInSuccessWithAuthResult: function (
-            authResult: any,
-            redirectUrl: any
-          ) {
-            console.log(authResult, redirectUrl);
-            // User successfully signed in.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.
-            return true;
-          },
-          uiShown: function () {
-            // The widget is rendered.
-            // Hide the loader.
-            document.getElementById('loader')!.style.display = 'none';
-          },
-        },
-        // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-        signInFlow: 'popup',
-        signInSuccessUrl: '<url-to-redirect-to-on-success>',
-        signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
-        // Terms of service url.
-        tosUrl: '<your-tos-url>',
-        // Privacy policy url.
-        privacyPolicyUrl: '<your-privacy-policy-url>',
-      };
-    });
+  }
+
+  ngOnDestroy(): void {
+    this.emailSubscription.unsubscribe();
+    this.passwordSubscription.unsubscribe();
   }
 }

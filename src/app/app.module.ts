@@ -6,7 +6,11 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 
 // Firebase Imports
-import * as firebase from 'firebase/app';
+// CUrrently this uses the old firebase API could upgrade to use the new ones at some point??
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 // Angular material imports
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,15 +20,19 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // Component imports
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-// Service imports 
-import { FirebaseService } from './services/firebase.service';
+// Service Imports
+import { AuthService } from './services/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,6 +41,7 @@ import { FirebaseService } from './services/firebase.service';
     HomeComponent,
     FooterComponent,
     LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,14 +52,18 @@ import { FirebaseService } from './services/firebase.service';
     MatRippleModule,
     MatButtonModule,
     MatToolbarModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
     MatMenuModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    ReactiveFormsModule
   ],
-  providers: [FirebaseService],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(private fbService: FirebaseService){
-    this.fbService.initializeFirebase();
-  }
-  
+  constructor() {}
 }

@@ -1,8 +1,115 @@
 <app-navbar></app-navbar>
 
-<p>login works!</p>
-<!-- The surrounding HTML is left untouched by FirebaseUI.
-     Your app may use that space for branding, controls and other customizations.-->
-<h1>Welcome to My Awesome App</h1>
-<div id="firebaseui-auth-container"></div>
-<div id="loader">Loading...</div>
+<div class="body-container">
+  <div *ngIf="isLogin; else signUp" class="login-container">
+    <div class="login-text-container">
+      <h2>Log in</h2>
+      <div class="signup-text-container">
+        <p>New to Gowander?&nbsp;</p>
+        <a (click)="onSwitchToSignUp()" style="cursor: pointer;">Sign up for free here</a>
+      </div>
+    </div>
+
+    <form class="email-login-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          [formControl]="emailFormControl"
+          placeholder="Ex. john@gowander.com"
+        />
+        <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          "
+        >
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput [formControl]="passwordFormControl" />
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Password is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+    <!-- NB that the spinner currently isnt visible but will leave the logic in to get to it at some point -->
+
+    <div class="auth-options-container">
+      <button mat-flat-button color="dark-blue" (click)="onLogIn()">
+        <ng-template *ngIf="loading; else loginText">
+          <div class="login-loading">
+            <div class="rounded animate-spin ease duration-300 w-5 h-5 border-2 border-white"></div>
+          </div>
+        </ng-template>
+        <ng-template #loginText>LOG IN</ng-template>
+      </button>
+      <h3>OR</h3>
+      <button mat-flat-button color="red">Log in with Google</button>
+    </div>
+  </div>
+
+  <ng-template #signUp>
+    <div class="login-container">
+      <div class="login-text-container">
+        <h2>Sign up</h2>
+        <div class="signup-text-container">
+          <p>Already have an account?&nbsp;</p>
+          <a (click)="onSwitchToLogIn()" style="cursor: pointer;">Log in here</a>
+        </div>
+      </div>
+
+      <form class="email-login-form">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            [formControl]="emailFormControl"
+            placeholder="Ex. john@gowander.com"
+          />
+          <mat-error
+            *ngIf="
+              emailFormControl.hasError('email') &&
+              !emailFormControl.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput [formControl]="passwordFormControl" />
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </form>
+
+      <!-- NB that the spinner currently isnt visible but will leave the logic in to get to it at some point -->
+
+      <div class="auth-options-container">
+        <button mat-flat-button color="dark-blue" (click)="onLogIn()">
+          <ng-template *ngIf="loading; else loginText">
+            <div class="login-loading">
+              <div class="rounded animate-spin ease duration-300 w-5 h-5 border-2 border-white"></div>
+            </div>
+          </ng-template>
+          <ng-template #loginText>SIGN UP</ng-template>
+        </button>
+        <h3>OR</h3>
+        <button mat-flat-button color="red"><i class="fab fa-apple"></i></button>
+      </div>
+    </div>
+  </ng-template>
+</div>
