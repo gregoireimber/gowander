@@ -1,0 +1,18 @@
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+.dashboard-container {
+  height: 100%;
+  width: 100%;
+
+  .button-container {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+
+    .mdc-fab {
+      background-color: black;
+    }
+  }
+}

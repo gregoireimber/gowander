@@ -46,13 +46,13 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public onSwitchToSignUp(): void {
-    this.authService.isLogin = false;
     this.router.navigateByUrl('/signup');
+    this.isLogin = this.authService.isLogin;
   }
 
   public onSwitchToLogIn(): void {
-    this.authService.isLogin = true;
     this.router.navigateByUrl('/login');
+    this.isLogin = this.authService.isLogin;
   }
 
   public onLogIn(): void {

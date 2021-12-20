@@ -22,6 +22,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // Component imports
 import { HomeComponent } from './home/home.component';
@@ -33,6 +34,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 // Service Imports
 import { AuthService } from './services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NewTripComponent } from './new-trip/new-trip.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     LoginComponent,
     DashboardComponent,
+    NewTripComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,13 +56,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,
+    MatDialogModule,
     MatProgressSpinnerModule,
     MatMenuModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

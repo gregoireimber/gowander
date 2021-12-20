@@ -3,31 +3,39 @@ $tablet-width: 768px;
 $desktop-width: 1024px;
 
 .home-container {
-    height: 100%;
-    width: 100%;
-    background-color: lightskyblue;
+  height: 100%;
+  width: 100%;
 }
 
 .content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: fit-content;
+  background-color: rgb(243, 243, 243);
+  width: 100%;
+
+  .content-img {
+    width: 50%;
+    height: 60%;
+  }
+
+  .content-two {
+    text-align: center;
+    width: 50%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: fit-content;
-    background-color: white;
-    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
 
-    .content-img {
-      width: 50%;
-      height: 60%;
+    .auth-button {
+      width: 60%;
+      margin: 0 auto;
     }
+  }
 
-    .content-two {
-      text-align: center;
-      width: 50%;
-    }
-
-    &.second {
-    }
+  &.second {
+  }
 }
 
 // Currently no styles as dont have real content in here
@@ -42,18 +50,18 @@ $desktop-width: 1024px;
 // Breakpoint specific styles
 // Phone
 @media (max-width: #{$tablet-width - 1px}) {
-	.content-container {
-        flex-direction: column;
-        text-align: center;
+  .content-container {
+    flex-direction: column;
+    text-align: center;
 
-        .content-img {
-          width: 100%;
-        }
-
-        .content-two {
-          width: 100%;
-        }
+    .content-img {
+      width: 100%;
     }
+
+    .content-two {
+      width: 100%;
+    }
+  }
 }
 
 // Currently no laptop/tablet specific styles

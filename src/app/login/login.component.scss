@@ -1,3 +1,7 @@
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
 .body-container {
   height: 100%;
   width: 100%;
@@ -6,7 +10,7 @@
   .login-container {
     position: relative;
     top: 5%;
-    width: 35%;
+    width: 600px;
     margin: auto;
     background-color: rgb(243, 243, 243);
     border-radius: 10px;
@@ -54,8 +58,16 @@
     height: 50px;
   }
 
-  .mat-flat-button.mat-dark-blue{
+  .mat-flat-button.mat-dark-blue {
     background-color: rgb(23, 23, 48);
     color: white;
- }
+  }
+}
+
+@media (max-width: #{$tablet-width - 1px}) {
+  .body-container {
+    .login-container {
+      width: 80%;
+    }
+  }
 }
