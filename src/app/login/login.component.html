@@ -11,7 +11,7 @@
     </div>
 
     <form class="email-login-form">
-      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-form-field>
         <mat-label>Email</mat-label>
         <input
           type="email"
@@ -31,7 +31,7 @@
           Email is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-form-field>
         <mat-label>Password</mat-label>
         <input type="password" matInput [formControl]="passwordFormControl" />
         <mat-error *ngIf="emailFormControl.hasError('required')">
@@ -67,7 +67,7 @@
       </div>
 
       <form class="email-login-form">
-        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field>
           <mat-label>Email</mat-label>
           <input
             type="email"
@@ -87,7 +87,7 @@
             Email is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field>
           <mat-label>Password</mat-label>
           <input type="password" matInput [formControl]="passwordFormControl" />
           <mat-error *ngIf="emailFormControl.hasError('required')">

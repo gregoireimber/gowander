@@ -23,6 +23,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
 
 // Component imports
 import { HomeComponent } from './home/home.component';
@@ -59,6 +60,7 @@ import { NewTripComponent } from './new-trip/new-trip.component';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatMenuModule,
+    MatStepperModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
