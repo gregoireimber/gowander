@@ -16,3 +16,12 @@ $desktop-width: 1024px;
     }
   }
 }
+
+@media (max-width: #{$tablet-width - 1px}) {
+  .dashboard-container {
+    .button-container {
+      bottom: 20px;
+      right: 20px;
+    }
+  }
+}
