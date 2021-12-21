@@ -1,29 +1,40 @@
 <div class="new-trip-container">
-
   <h2>Start Planning Your Trip</h2>
 
-  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa soluta nobis optio fuga rem natus modi sunt reprehenderit obcaecati. Sint.</p>
-
+  <p>
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa soluta nobis
+    optio fuga rem natus modi sunt reprehenderit obcaecati. Sint.
+  </p>
 
   <mat-stepper [orientation]="orientation" [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
+    <mat-step [stepControl]="stepOneGroup" state="phone">
+      <form [formGroup]="stepOneGroup">
         <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+          <input
+            matInput
+            placeholder="Last name, First name"
+            formControlName="firstCtrl"
+            required
+          />
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-      <form [formGroup]="secondFormGroup">
-        <mat-form-field appearance="fill">
+    <mat-step [stepControl]="stepTwoGroup">
+      <form [formGroup]="stepTwoGroup">
+        <ng-template matStepLabel>Fill out your address</ng-template>
+        <mat-form-field>
           <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
+          <input
+            matInput
+            formControlName="secondCtrl"
+            placeholder="Ex. 1 Main St, New York, NY"
+            required
+          />
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -39,5 +50,13 @@
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>
+
+    <!-- Icon overrides. -->
+    <ng-template matStepperIcon="phone">
+      <mat-icon>call_end</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="chat">
+      <mat-icon>forum</mat-icon>
+    </ng-template>
   </mat-stepper>
 </div>

@@ -3,22 +3,10 @@
     <div class="menu-icon">
       <button
         mat-icon-button
-        [matMenuTriggerFor]="menu"
-        aria-label="Menu button icon"
+        (click)="openNav()"
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <span>Option 1</span>
-        </button>
-        <button mat-menu-item>
-          <span>Option 2</span>
-        </button>
-        <button mat-menu-item>
-          <span>Option 3</span>
-        </button>
-      </mat-menu>
     </div>
     <div class="logo-container">
       <a href="/home">
@@ -38,4 +26,19 @@
     </div>
     <div class="account-menu">Account</div>
   </div>
+</div>
+
+<!-- The overlay menu -->
+<div id="myNav" class="overlay" [ngStyle]="{'height': isOpen ? '100%' : '0%'}">
+
+  <!-- Button to close the overlay navigation -->
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+
+  <!-- Overlay content -->
+  <div class="overlay-content">
+    <a class="overlay-option" href="#">Option 1</a>
+    <a class="overlay-option" href="#">Option 2</a>
+    <a class="overlay-option" href="#">Option 3</a>
+  </div>
+
 </div>

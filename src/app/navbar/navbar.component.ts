@@ -3,19 +3,28 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
-
   public showMenu = false;
+  public isOpen: boolean = false;
 
-  ngOnInit(): void {
-  }
+  constructor() {}
+
+  ngOnInit(): void {}
 
   // Need a way of getting the inputs from the angular material menu
 
-  // This will probably get changed eventually 
+  // This will probably get changed eventually
 
+  /* Open */
+  public openNav(): void {
+    this.isOpen = true;
+  }
+
+  /* Close */
+  public closeNav(): void {
+    this.isOpen = false;
+  }
 }

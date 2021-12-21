@@ -11,10 +11,10 @@ import { NewTripData } from '../dashboard/dashboard.component';
 })
 export class NewTripComponent implements OnInit {
 
-  public isLinear = true;
+  public isLinear = false;
   public orientation: StepperOrientation = "vertical";
-  public firstFormGroup: FormGroup;
-  public secondFormGroup: FormGroup;
+  public stepOneGroup: FormGroup;
+  public stepTwoGroup: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<NewTripComponent>,
@@ -22,10 +22,10 @@ export class NewTripComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
 
-    this.firstFormGroup = this.formBuilder.group({
+    this.stepOneGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required],
     });
-    this.secondFormGroup = this.formBuilder.group({
+    this.stepTwoGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required],
     });
   }
