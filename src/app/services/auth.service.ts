@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private router: Router, private fireAuth: AngularFireAuth) {}
+  constructor(
+    private router: Router,
+    private fireAuth: AngularFireAuth,
+    private db: AngularFirestore
+  ) {}
 
   public isLoggedIn = false;
-  private _user = null;
+  private _userId: string | undefined = '';
 
   public get isLogin(): boolean {
     if (this.router.url === '/login') {
@@ -22,35 +27,62 @@ export class AuthService {
   }
 
   // Type this later when I knpw what the return type of user is
-  public getUser(): any {
-    return this._user;
+  public getUserId(): string | undefined {
+    return this._userId;
   }
 
-  public async emailSignUp(email: string, password: string): Promise<void> {
-    await this.fireAuth.createUserWithEmailAndPassword(email, password)
+  public async getUserInformation(userId: string | undefined): Promise<any> {
+    try {
+      if (userId) {
+        const snapshot = await this.db.collection('users').doc(userId).get().toPromise();
+        return snapshot.data();
+      } else {
+        throw 'No logged in user found.'
+      }
+    } catch (err) {
+      // Maybe could add an error using a messaging service to tell the user
+      console.error(err);
+    }
+  }
+
+  public async emailSignUp(signUpInfo: any): Promise<void> {
+    await this.fireAuth
+      .createUserWithEmailAndPassword(signUpInfo.email, signUpInfo.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log('here', email, password, this._user)
-        this.isLoggedIn = true;
-        // ...
-        // maybe add the userid to the end of this url to make it so that you go to your own dashboard
+
+        if (user!.uid !== null) {
+          this.isLoggedIn = true;
+          this._userId = user!.uid;
+
+          this.db.collection('users').doc(this._userId).set({
+            firstName: signUpInfo.firstName,
+            lastName: signUpInfo.lastName,
+            email: signUpInfo.email,
+            password: signUpInfo.password,
+          });
+        } else {
+          // Emit an error message using a message service
+        }
+
         this.router.navigateByUrl('/dashboard');
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
       });
   }
 
   public async emailLogin(email: string, password: string): Promise<void> {
-    await this.fireAuth.signInWithEmailAndPassword(email, password)
+    await this.fireAuth
+      .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         this.isLoggedIn = true;
-        // ...
+        this._userId = user!.uid;
+
         this.router.navigateByUrl('/dashboard');
       })
       .catch((error) => {
