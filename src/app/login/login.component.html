@@ -6,7 +6,9 @@
       <h2>Log in</h2>
       <div class="signup-text-container">
         <p>New to Gowander?&nbsp;</p>
-        <a (click)="onSwitchToSignUp()" style="cursor: pointer;">Sign up for free here</a>
+        <a (click)="onSwitchToSignUp()" style="cursor: pointer"
+          >Sign up for free here</a
+        >
       </div>
     </div>
 
@@ -46,7 +48,17 @@
       <button mat-flat-button color="dark-blue" (click)="onLogIn()">
         <ng-template *ngIf="loading; else loginText">
           <div class="login-loading">
-            <div class="rounded animate-spin ease duration-300 w-5 h-5 border-2 border-white"></div>
+            <div
+              class="
+                rounded
+                animate-spin
+                ease
+                duration-300
+                w-5
+                h-5
+                border-2 border-white
+              "
+            ></div>
           </div>
         </ng-template>
         <ng-template #loginText>LOG IN</ng-template>
@@ -62,11 +74,25 @@
         <h2>Sign up</h2>
         <div class="signup-text-container">
           <p>Already have an account?&nbsp;</p>
-          <a (click)="onSwitchToLogIn()" style="cursor: pointer;">Log in here</a>
+          <a (click)="onSwitchToLogIn()" style="cursor: pointer">Log in here</a>
         </div>
       </div>
 
       <form class="email-login-form">
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" [formControl]="firstNameFormControl" />
+          <mat-error *ngIf="firstNameFormControl.hasError('required')">
+            First Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" [formControl]="lastNameFormControl" />
+          <mat-error *ngIf="lastNameFormControl.hasError('required')">
+            Last Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
         <mat-form-field>
           <mat-label>Email</mat-label>
           <input
@@ -99,16 +125,28 @@
       <!-- NB that the spinner currently isnt visible but will leave the logic in to get to it at some point -->
 
       <div class="auth-options-container">
-        <button mat-flat-button color="dark-blue" (click)="onLogIn()">
+        <button mat-flat-button color="dark-blue" (click)="onSignUp()">
           <ng-template *ngIf="loading; else loginText">
             <div class="login-loading">
-              <div class="rounded animate-spin ease duration-300 w-5 h-5 border-2 border-white"></div>
+              <div
+                class="
+                  rounded
+                  animate-spin
+                  ease
+                  duration-300
+                  w-5
+                  h-5
+                  border-2 border-white
+                "
+              ></div>
             </div>
           </ng-template>
           <ng-template #loginText>SIGN UP</ng-template>
         </button>
         <h3>OR</h3>
-        <button mat-flat-button color="red"><i class="fab fa-apple"></i></button>
+        <button mat-flat-button color="red">
+          <i class="fab fa-apple"></i>
+        </button>
       </div>
     </div>
   </ng-template>
