@@ -7,6 +7,28 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// Snackbar global styles
+.snackbar-warning {
+  background-color: red;
+  color: white;
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}
+
+.snackbar-success {
+  background-color: green;
+  color: white;
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}

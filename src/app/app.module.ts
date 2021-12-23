@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // Component imports
 import { HomeComponent } from './home/home.component';
@@ -36,6 +37,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthService } from './services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewTripComponent } from './new-trip/new-trip.component';
+import { MessagingService } from './services/messaging.service';
 
 @NgModule({
   declarations: [
@@ -61,13 +63,14 @@ import { NewTripComponent } from './new-trip/new-trip.component';
     MatProgressSpinnerModule,
     MatMenuModule,
     MatStepperModule,
+    MatSnackBarModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, MessagingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

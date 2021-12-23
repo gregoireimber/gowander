@@ -1,10 +1,7 @@
 <div class="navbar-container">
   <div class="small-menu">
     <div class="menu-icon">
-      <button
-        mat-icon-button
-        (click)="openNav()"
-      >
+      <button mat-icon-button (click)="openNav()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
@@ -13,24 +10,33 @@
         <img src="../../assets/images/gowanderLogo.jpg" alt="" />
       </a>
     </div>
-    <div class="account-menu">Account</div>
+    <div class="account-menu">
+      <button mat-button (click)="onAuthAction()">
+        {{ isLoggedIn ? "Log Out" : "Log In" }}
+      </button>
+    </div>
   </div>
   <div class="large-menu">
     <div class="logo-container">
-      <img src="../../assets/images/gowanderLogo.jpg" alt="" />
+      <a href="/home">
+        <img src="../../assets/images/gowanderLogo.jpg" alt="" />
+      </a>
     </div>
     <div class="navbar-options">
       <div class="navbar-option">Option 1</div>
       <div class="navbar-option">Option 2</div>
       <div class="navbar-option">Option 3</div>
     </div>
-    <div class="account-menu">Account</div>
+    <div class="account-menu">
+      <button mat-button (click)="onAuthAction()">
+        {{ isLoggedIn ? "Log Out" : "Log In" }}
+      </button>
+    </div>
   </div>
 </div>
 
 <!-- The overlay menu -->
-<div id="myNav" class="overlay" [ngStyle]="{'height': isOpen ? '100%' : '0%'}">
-
+<div id="myNav" class="overlay" [ngStyle]="{ height: isOpen ? '100%' : '0%' }">
   <!-- Button to close the overlay navigation -->
   <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
 
@@ -40,5 +46,4 @@
     <a class="overlay-option" href="#">Option 2</a>
     <a class="overlay-option" href="#">Option 3</a>
   </div>
-
 </div>

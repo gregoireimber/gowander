@@ -17,6 +17,12 @@ $desktop-width: 1024px;
   }
 }
 
+.header-message {
+  position: relative;
+  top: 15px;
+  left: 30px;
+}
+
 @media (max-width: #{$tablet-width - 1px}) {
   .dashboard-container {
     .button-container {
