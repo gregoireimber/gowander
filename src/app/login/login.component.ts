@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { MessagingService } from '../services/messaging.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +13,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit, OnChanges, OnDestroy {
   // Add some password validators - e.g min length and the need for a number or a special symbol to make the app more secure
   // Will also need to change the relative error messgaes with hints as to how to make the password pass the checks
-  passwordFormControl = new FormControl('', [Validators.required]);
+  passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
   public loading = false;
   public isLogin = true;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private messageServ: MessagingService) {
     this.emailSubscription = this.emailFormControl.valueChanges.subscribe(
       (email: string) => {
         this.email = email;
@@ -78,7 +79,7 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
         this.loading = false;
       })
       .catch((error) => {
-        console.log('error');
+        this.messageServ.emitErrorMessage(error.message);
       });
   }
 
@@ -96,7 +97,7 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
       this.loading = false;
     })
     .catch((error) => {
-      console.log('error');
+      this.messageServ.emitErrorMessage(error.message);
     })
   }
 

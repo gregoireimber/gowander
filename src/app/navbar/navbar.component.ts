@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,14 +11,21 @@ export class NavbarComponent implements OnInit {
 
   public showMenu = false;
   public isOpen: boolean = false;
+  public isLoggedIn = false;
 
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isLoggedIn;
+  }
 
-  // Need a way of getting the inputs from the angular material menu
-
-  // This will probably get changed eventually
+  public onAuthAction(): void {
+    if (this.isLoggedIn) {
+      this.authService.logout();
+    } else {
+      this.router.navigateByUrl('/login')
+    }
+  }
 
   /* Open */
   public openNav(): void {
