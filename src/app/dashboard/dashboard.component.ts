@@ -13,15 +13,18 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService, public dialog: MatDialog) { }
 
+  public loading = false;
   public isLoggedIn = false;
   public userInformation: any = '';
 
   ngOnInit(): void {
+    this.loading = true;
     this.isLoggedIn = this.authService.isLoggedIn;
     this.getUserInfo();
 
     // If not logged in, navigate to log in
     if (this.isLoggedIn === false) this.router.navigateByUrl('/login');
+
   }
 
   public onAdd(): void {
@@ -38,6 +41,7 @@ export class DashboardComponent implements OnInit {
   public async getUserInfo() {
     const userId = this.authService.getUserId();
     this.userInformation = await this.authService.getUserInformation(userId).then((response: any) => {
+      this.loading = false;
       return response;
     });
   }

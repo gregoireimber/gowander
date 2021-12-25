@@ -1,13 +1,16 @@
 <app-navbar></app-navbar>
 
 <div class="dashboard-container">
+  <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
 
-  <h1 class="header-message">{{userInformation.firstName}}'s Dashboard</h1>
+  <ng-container *ngIf="!loading">
+    <h1 class="header-message">{{ userInformation.firstName }}'s Dashboard</h1>
 
-  <div class="button-container">
-    <button class="mdc-fab" aria-label="Add" (click)="onAdd()">
-      <div class="mdc-fab__ripple"></div>
-      <span class="mdc-fab__icon material-icons">add</span>
-    </button>
-  </div>
+    <div class="button-container">
+      <button class="mdc-fab" aria-label="Add" (click)="onAdd()">
+        <div class="mdc-fab__ripple"></div>
+        <span class="mdc-fab__icon material-icons">add</span>
+      </button>
+    </div>
+  </ng-container>
 </div>
