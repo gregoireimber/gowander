@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
 
   public onAuthAction(): void {
     if (this.isLoggedIn) {
-      this.authService.logout();
+      this.authService.logOut();
     } else {
       this.router.navigateByUrl('/login')
     }
