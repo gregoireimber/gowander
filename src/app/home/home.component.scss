@@ -3,7 +3,8 @@ $tablet-width: 768px;
 $desktop-width: 1024px;
 
 .home-container {
-  height: 100%;
+  display: block;
+  position: relative;
   width: 100%;
 }
 
@@ -12,12 +13,12 @@ $desktop-width: 1024px;
   flex-direction: row;
   justify-content: space-between;
   height: fit-content;
-  background-color: rgb(243, 243, 243);
   width: 100%;
 
   .content-img {
-    width: 60%;
-    height: 30%;
+    width: 100%;
+    z-index: -1;
+    opacity: 35%;
   }
 
   .content-two {
@@ -36,6 +37,11 @@ $desktop-width: 1024px;
 
   // &.second {
   // }
+}
+
+.footer-container-main {
+  position: relative;
+  width: 100vw;
 }
 
 // Currently no styles as dont have real content in here

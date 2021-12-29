@@ -1,12 +1,28 @@
 <app-navbar></app-navbar>
 
 <div class="body-container">
+  <div *ngIf="!isMobile">
+    <img
+      class="background-image"
+      src="../../assets/images/luca-bravo-O453M2Liufs-unsplash.jpg"
+      alt=""
+    />
+  </div>
+
+  <div *ngIf="isMobile">
+    <img
+      class="background-image"
+      src="../../assets/images/luca-bravo-O453M2Liufs-unsplash-portrait.jpg"
+      alt=""
+    />
+  </div>
+
   <div *ngIf="isLogin; else signUp" class="login-container">
     <div class="login-text-container">
       <h2>Log in</h2>
       <div class="signup-text-container">
         <p>New to Gowander?&nbsp;</p>
-        <a (click)="onSwitchToSignUp()" style="cursor: pointer"
+        <a (click)="onSwitchToSignUp()" style="cursor: pointer; color: orange"
           >Sign up for free here</a
         >
       </div>
@@ -74,7 +90,9 @@
         <h2>Sign up</h2>
         <div class="signup-text-container">
           <p>Already have an account?&nbsp;</p>
-          <a (click)="onSwitchToLogIn()" style="cursor: pointer">Log in here</a>
+          <a (click)="onSwitchToLogIn()" style="cursor: pointer; color: orange"
+            >Log in here</a
+          >
         </div>
       </div>
 
@@ -158,4 +176,8 @@
       </div>
     </div>
   </ng-template>
+</div>
+
+<div class="footer-container">
+  <app-footer></app-footer>
 </div>

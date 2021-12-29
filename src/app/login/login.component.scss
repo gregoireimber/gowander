@@ -3,16 +3,22 @@ $tablet-width: 768px;
 $desktop-width: 1024px;
 
 .body-container {
-  height: 100%;
   width: 100%;
-  background-color: white;
+  display: flex;
+  justify-content: center;
+
+  .background-image {
+    z-index: -1;
+    opacity: 35%;
+  }
 
   .login-container {
-    position: relative;
-    top: 5%;
+    z-index: 1;
+    position: absolute;
+    top: 10%;
     width: 600px;
     margin: auto;
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(225, 232, 241);
     border-radius: 10px;
 
     .login-text-container {
@@ -62,6 +68,11 @@ $desktop-width: 1024px;
     background-color: rgb(23, 23, 48);
     color: white;
   }
+}
+
+.footer-container {
+  width: 100%;
+  position: relative;
 }
 
 @media (max-width: #{$tablet-width - 1px}) {
