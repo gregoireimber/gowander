@@ -1,8 +1,7 @@
-import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { Component, HostListener, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { MessagingService } from '../services/messaging.service';
 @Component({
@@ -11,9 +10,22 @@ import { MessagingService } from '../services/messaging.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnChanges, OnDestroy {
+
+  @HostListener('window:resize', ['$event'])
+  private onResize(event: any) {
+    if (event.target.innerWidth < 1024) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
+  }
+
   // Add some password validators - e.g min length and the need for a number or a special symbol to make the app more secure
   // Will also need to change the relative error messgaes with hints as to how to make the password pass the checks
-  passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6),
+  ]);
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -33,28 +45,42 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
 
   public loading = false;
   public isLogin = true;
+  public isMobile = false;
 
-  constructor(private authService: AuthService, private router: Router, private messageServ: MessagingService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private messageServ: MessagingService
+  ) {
     this.emailSubscription = this.emailFormControl.valueChanges.subscribe(
       (email: string) => {
         this.email = email;
       }
     );
+
     this.passwordSubscription = this.passwordFormControl.valueChanges.subscribe(
       (password: string) => {
         this.password = password;
       }
     );
-    this.firstNameSubscription = this.firstNameFormControl.valueChanges.subscribe((firstName: string) => {
-      this.firstName = firstName;
-    });
-    this.lastNameSubscription = this.lastNameFormControl.valueChanges.subscribe((lastName: string) => {
-      this.lastName = lastName;
-    });
+
+    this.firstNameSubscription =
+      this.firstNameFormControl.valueChanges.subscribe((firstName: string) => {
+        this.firstName = firstName;
+      });
+
+    this.lastNameSubscription = this.lastNameFormControl.valueChanges.subscribe(
+      (lastName: string) => {
+        this.lastName = lastName;
+      }
+    );
+
   }
 
   ngOnInit(): void {
     this.isLogin = this.authService.isLogin;
+
+    if (window.screen.width < 1024) this.isMobile = true;
   }
 
   ngOnChanges(): void {
@@ -90,15 +116,17 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
       firstName: this.firstName.trim(),
       lastName: this.lastName.trim(),
       email: this.email.trim(),
-      password: this.password.trim()
+      password: this.password.trim(),
     };
 
-    this.authService.emailSignUp(signUpInfo).then(() => {
-      this.loading = false;
-    })
-    .catch((error) => {
-      this.messageServ.emitErrorMessage(error.message);
-    })
+    this.authService
+      .emailSignUp(signUpInfo)
+      .then(() => {
+        this.loading = false;
+      })
+      .catch((error) => {
+        this.messageServ.emitErrorMessage(error.message);
+      });
   }
 
   ngOnDestroy(): void {

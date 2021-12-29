@@ -38,6 +38,7 @@ import { AuthService } from './services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewTripComponent } from './new-trip/new-trip.component';
 import { MessagingService } from './services/messaging.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,7 @@ import { MessagingService } from './services/messaging.service';
     AngularFireStorageModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService, MessagingService],
+  providers: [AuthService, MessagingService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {

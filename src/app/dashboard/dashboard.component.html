@@ -1,7 +1,18 @@
 <app-navbar></app-navbar>
 
 <div class="dashboard-container">
-  <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
+
+  <div *ngIf="loading" class="centre-loader">
+    <div
+      class="
+        animate-spin
+        rounded-full
+        h-24
+        w-24
+        border-t-4 border-b-4 border-black
+      "
+    ></div>
+  </div>
 
   <ng-container *ngIf="!loading">
     <h1 class="header-message">{{ userInformation.firstName }}'s Dashboard</h1>

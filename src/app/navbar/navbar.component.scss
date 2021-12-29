@@ -46,6 +46,10 @@ $desktop-width: 1024px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  .nav-acc-button mat-button {
+    padding: 0px;
+  }
 }
 
 .menu-icon {
