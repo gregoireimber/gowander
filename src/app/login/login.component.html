@@ -1,21 +1,6 @@
 <app-navbar></app-navbar>
 
 <div class="body-container">
-  <div *ngIf="!isMobile">
-    <img
-      class="background-image"
-      src="../../assets/images/luca-bravo-O453M2Liufs-unsplash.jpg"
-      alt=""
-    />
-  </div>
-
-  <div *ngIf="isMobile">
-    <img
-      class="background-image"
-      src="../../assets/images/luca-bravo-O453M2Liufs-unsplash-portrait.jpg"
-      alt=""
-    />
-  </div>
 
   <div *ngIf="isLogin; else signUp" class="login-container">
     <div class="login-text-container">
@@ -176,8 +161,20 @@
       </div>
     </div>
   </ng-template>
-</div>
 
-<div class="footer-container">
-  <app-footer></app-footer>
+  <div class="bg-img-cont" *ngIf="!isMobile">
+    <img
+      class="background-image"
+      src="../../assets/images/luca-bravo-O453M2Liufs-unsplash.jpg"
+      alt=""
+    />
+  </div>
+
+  <div class="bg-img-cont" *ngIf="isMobile">
+    <img
+      class="background-image"
+      src="../../assets/images/luca-bravo-O453M2Liufs-unsplash-portrait.jpg"
+      alt=""
+    />
+  </div>
 </div>

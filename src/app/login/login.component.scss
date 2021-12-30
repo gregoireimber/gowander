@@ -7,15 +7,19 @@ $desktop-width: 1024px;
   display: flex;
   justify-content: center;
 
-  .background-image {
-    z-index: -1;
-    opacity: 35%;
+  .bg-img-cont {
+    position: absolute;
+    top: 55px;
+    .background-image {
+      z-index: -1;
+      opacity: 35%;
+    }
   }
 
   .login-container {
     z-index: 1;
-    position: absolute;
-    top: 10%;
+    position: relative;
+    top: 50px;
     width: 600px;
     margin: auto;
     background-color: rgb(225, 232, 241);
@@ -72,7 +76,9 @@ $desktop-width: 1024px;
 
 .footer-container {
   width: 100%;
-  position: relative;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
 }
 
 @media (max-width: #{$tablet-width - 1px}) {
