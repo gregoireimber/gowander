@@ -97,19 +97,21 @@ export class NewTripComponent implements OnInit {
     if (value) this.continentsSelected.push(value);
 
     // Clear the input value
+    this.stepTwoGroup.patchValue({continentCtrl: null}, {emitEvent: false});
     event.chipInput!.clear();
-    this.stepTwoGroup.setValue({continentCtrl: ''});
+    console.log(this.stepTwoGroup.get('continentCtrl')?.value)
   }
 
   public selected(event: MatAutocompleteSelectedEvent): void {
     this.continentsSelected.push(event.option.viewValue);
+    this.stepTwoGroup.patchValue({continentCtrl: null}, {emitEvent: false});
     this.continentInput!.nativeElement.value = '';
-    this.stepTwoGroup.setValue({continentCtrl: ''});
+    console.log('yo', this.stepTwoGroup.get('continentCtrl')?.value)
   }
 
   private _filter(name: any): any[] {
     console.log(name, this.filteredContinents)
-    if (name.continentCtrl) {
+    if (name.continentCtrl && typeof name.continentCtrl === 'string') {
       const filterValue = name.continentCtrl.toLowerCase();
       return this.continentList.filter((option: any) =>
         option[1].toLowerCase().includes(filterValue)
