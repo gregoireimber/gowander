@@ -33,14 +33,21 @@ export class NewTripComponent implements OnInit {
   public continentList: any[] = Object.entries(continents);
   public continentsSelected: any[] = [];
   public filteredContinents: Observable<any[]>;
-  public countryList = [];
+
   public separatorKeysCodes: number[] = [ENTER, COMMA];
-  @ViewChild('continentInput') continentInput:
+  @ViewChild('continentInput') continentInput:| ElementRef<HTMLInputElement> | undefined;
+
+  public filteredCountries: Observable<any[]>;
+  public countryList: any[] = [];
+  public countriesSelected: any[] = [];
+
+  @ViewChild('continentInput') countryInput:
     | ElementRef<HTMLInputElement>
     | undefined;
 
   public stepOneGroup: FormGroup;
   public stepTwoGroup: FormGroup;
+  public stepThreeGroup: FormGroup;
 
   public newTripForm = new FormGroup({
     tripName: new FormControl('', [Validators.required]),
@@ -66,9 +73,18 @@ export class NewTripComponent implements OnInit {
       continentCtrl: ['', Validators.required],
     });
 
+    this.stepThreeGroup = this.formBuilder.group({
+      countryCtrl: ['', Validators.required],
+    })
+
     this.filteredContinents = this.stepTwoGroup.valueChanges.pipe(
       startWith(''),
-      map((value: any) => this._filter(value))
+      map((value: any) => this._filterContinent(value))
+    );
+
+    this.filteredCountries = this.stepThreeGroup.valueChanges.pipe(
+      startWith(''),
+      map((value: any) => this._filterCountry(value))
     );
   }
 
@@ -84,7 +100,7 @@ export class NewTripComponent implements OnInit {
     console.log(countryArray);
   }
 
-  public remove(cont: string): void {
+  public removeContinent(cont: string): void {
     const index = this.continentsSelected.indexOf(cont);
 
     if (index >= 0) {
@@ -92,25 +108,56 @@ export class NewTripComponent implements OnInit {
     }
   }
 
-  public add(event: MatChipInputEvent): void {
+  public addContinent(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
     if (value) this.continentsSelected.push(value);
 
     // Clear the input value
-    this.stepTwoGroup.patchValue({continentCtrl: null}, {emitEvent: false});
+    this.stepTwoGroup.patchValue({ continentCtrl: null }, { emitEvent: false });
     event.chipInput!.clear();
-    console.log(this.stepTwoGroup.get('continentCtrl')?.value)
   }
 
-  public selected(event: MatAutocompleteSelectedEvent): void {
+  public selectedContinent(event: MatAutocompleteSelectedEvent): void {
     this.continentsSelected.push(event.option.viewValue);
-    this.stepTwoGroup.patchValue({continentCtrl: null}, {emitEvent: false});
+    this.stepTwoGroup.patchValue({ continentCtrl: null }, { emitEvent: false });
     this.continentInput!.nativeElement.value = '';
-    console.log('yo', this.stepTwoGroup.get('continentCtrl')?.value)
   }
 
-  private _filter(name: any): any[] {
-    console.log(name, this.filteredContinents)
+  public removeCountry(country: string): void {
+    const index = this.continentsSelected.indexOf(country);
+
+    if (index >= 0) {
+      this.continentsSelected.splice(index, 1);
+    }
+  }
+
+  public addCountry(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+    if (value) this.continentsSelected.push(value);
+
+    // Clear the input value
+    this.stepTwoGroup.patchValue({ continentCtrl: null }, { emitEvent: false });
+    event.chipInput!.clear();
+  }
+
+  public selectedCountry(event: MatAutocompleteSelectedEvent): void {
+    this.continentsSelected.push(event.option.viewValue);
+    this.stepTwoGroup.patchValue({ continentCtrl: null }, { emitEvent: false });
+    this.continentInput!.nativeElement.value = '';
+  }
+
+  private _filterContinent(name: any): any[] {
+    if (name.continentCtrl && typeof name.continentCtrl === 'string') {
+      const filterValue = name.continentCtrl.toLowerCase();
+      return this.continentList.filter((option: any) =>
+        option[1].toLowerCase().includes(filterValue)
+      );
+    } else {
+      return [];
+    }
+  }
+
+  private _filterCountry(name: any): any[] {
     if (name.continentCtrl && typeof name.continentCtrl === 'string') {
       const filterValue = name.continentCtrl.toLowerCase();
       return this.continentList.filter((option: any) =>

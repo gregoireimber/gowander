@@ -29,15 +29,13 @@
     </mat-step>
     <mat-step [stepControl]="stepTwoGroup">
       <form [formGroup]="stepTwoGroup">
-        <ng-template matStepLabel
-          >Set a region and type for your trip</ng-template
-        >
-        <mat-form-field class="continent-input">
+        <ng-template matStepLabel>Set a region for your trip</ng-template>
+        <mat-form-field class="step-two-input">
           <mat-label>Continents</mat-label>
-          <mat-chip-list #chipList aria-label="Continent selection">
+          <mat-chip-list #chipListContinent aria-label="Continent selection">
             <mat-chip
               *ngFor="let continent of continentsSelected"
-              (removed)="remove(continent)"
+              (removed)="removeContinent(continent)"
             >
               {{ continent }}
               <button matChipRemove>
@@ -49,20 +47,64 @@
               formControlName="continentCtrl"
               #continentInput
               [matAutocomplete]="auto"
-              [matChipInputFor]="chipList"
+              [matChipInputFor]="chipListContinent"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="add($event)"
+              (matChipInputTokenEnd)="addContinent($event)"
             />
           </mat-chip-list>
           <mat-autocomplete
             #auto="matAutocomplete"
-            (optionSelected)="selected($event)"
+            (optionSelected)="selectedContinent($event)"
           >
             <mat-option
               *ngFor="let continent of filteredContinents | async"
               [value]="continent"
             >
               {{ continent[1] }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="stepThreeGroup">
+      <form [formGroup]="stepThreeGroup">
+        <ng-template matStepLabel>Set countries for your trip</ng-template>
+        <mat-form-field class="step-three-input">
+          <mat-label>Countries</mat-label>
+          <mat-chip-list #chipListCountry aria-label="Country selection">
+            <mat-chip
+              *ngFor="let country of countriesSelected"
+              (removed)="removeCountry(country)"
+            >
+              {{ country }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              placeholder="Type a country..."
+              formControlName="countryCtrl"
+              #countryInput
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipListCountry"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addCountry($event)"
+            />
+          </mat-chip-list>
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="selectedCountry($event)"
+          >
+            <mat-option
+              *ngFor="let country of filteredCountries | async"
+              [value]="country"
+            >
+              {{ country[1] }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
