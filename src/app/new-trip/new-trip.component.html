@@ -7,17 +7,20 @@
   </p>
 
   <mat-stepper [orientation]="orientation" [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="stepOneGroup" state="phone">
+    <mat-step [stepControl]="stepOneGroup">
       <form [formGroup]="stepOneGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
+        <ng-template matStepLabel>Set a name for your trip</ng-template>
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input
             matInput
-            placeholder="Last name, First name"
-            formControlName="firstCtrl"
+            placeholder="My awesome roadtrip!"
+            formControlName="tripName"
             required
           />
+          <mat-error *ngIf="stepOneGroup.hasError('required')">
+            Please enter a name
+          </mat-error>
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
@@ -26,15 +29,42 @@
     </mat-step>
     <mat-step [stepControl]="stepTwoGroup">
       <form [formGroup]="stepTwoGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field>
-          <mat-label>Address</mat-label>
-          <input
-            matInput
-            formControlName="secondCtrl"
-            placeholder="Ex. 1 Main St, New York, NY"
-            required
-          />
+        <ng-template matStepLabel
+          >Set a region and type for your trip</ng-template
+        >
+        <mat-form-field class="continent-input">
+          <mat-label>Continents</mat-label>
+          <mat-chip-list #chipList aria-label="Continent selection">
+            <mat-chip
+              *ngFor="let continent of continentsSelected"
+              (removed)="remove(continent)"
+            >
+              {{ continent }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              placeholder="Type a continent..."
+              formControlName="continentCtrl"
+              #continentInput
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-list>
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="selected($event)"
+          >
+            <mat-option
+              *ngFor="let continent of filteredContinents | async"
+              [value]="continent"
+            >
+              {{ continent[1] }}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>

@@ -25,6 +25,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 // Component imports
 import { HomeComponent } from './home/home.component';
@@ -39,6 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NewTripComponent } from './new-trip/new-trip.component';
 import { MessagingService } from './services/messaging.service';
 import { AuthGuard } from './guards/auth.guard';
+import { TripService } from './services/trip.service';
 
 @NgModule({
   declarations: [
@@ -65,13 +68,15 @@ import { AuthGuard } from './guards/auth.guard';
     MatMenuModule,
     MatStepperModule,
     MatSnackBarModule,
+    MatChipsModule,
+    MatAutocompleteModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService, MessagingService, AuthGuard],
+  providers: [AuthService, MessagingService, AuthGuard, TripService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
