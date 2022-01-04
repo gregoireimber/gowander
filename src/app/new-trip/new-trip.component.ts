@@ -71,10 +71,10 @@ export class NewTripComponent implements OnInit {
 
     this.stepTwoGroup = this.formBuilder.group({
       continentCtrl: ['', Validators.required],
+      countryCtrl: ['', Validators.required],
     });
 
     this.stepThreeGroup = this.formBuilder.group({
-      countryCtrl: ['', Validators.required],
     })
 
     this.filteredContinents = this.stepTwoGroup.valueChanges.pipe(
@@ -82,7 +82,7 @@ export class NewTripComponent implements OnInit {
       map((value: any) => this._filterContinent(value))
     );
 
-    this.filteredCountries = this.stepThreeGroup.valueChanges.pipe(
+    this.filteredCountries = this.stepTwoGroup.valueChanges.pipe(
       startWith(''),
       map((value: any) => this._filterCountry(value))
     );
@@ -121,6 +121,7 @@ export class NewTripComponent implements OnInit {
     this.continentsSelected.push(event.option.viewValue);
     this.stepTwoGroup.patchValue({ continentCtrl: null }, { emitEvent: false });
     this.continentInput!.nativeElement.value = '';
+    console.log(this.continentsSelected.includes(Object.values(continents)));
   }
 
   public removeCountry(country: string): void {
