@@ -64,16 +64,6 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="stepThreeGroup">
-      <form [formGroup]="stepThreeGroup">
-        <ng-template matStepLabel>Set countries for your trip</ng-template>
         <mat-form-field class="step-three-input">
           <mat-label>Countries</mat-label>
           <mat-chip-list #chipListCountry aria-label="Country selection">
@@ -114,6 +104,7 @@
         </div>
       </form>
     </mat-step>
+
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
