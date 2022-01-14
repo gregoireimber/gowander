@@ -1,0 +1,8 @@
+<button (click)="getPhotosForKeyword()">PRESS FOR IMAGES</button>
+<div class="images-component-container">
+  <div *ngIf="showImages" class="images-container">
+    <div *ngFor="let image of imagesForKeyword">
+      <img src="{{ image.urls.small }}" alt="{{image.alt_description}}" />
+    </div>
+  </div>
+</div>

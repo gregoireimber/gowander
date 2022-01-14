@@ -9,12 +9,14 @@
   <mat-stepper [orientation]="orientation" [linear]="isLinear" #stepper>
     <mat-step [stepControl]="stepOneGroup">
       <form [formGroup]="stepOneGroup">
-        <ng-template matStepLabel>Set a name for your trip</ng-template>
+        <ng-template matStepLabel
+          >Set a name and type for your trip</ng-template
+        >
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input
             matInput
-            placeholder="My awesome roadtrip!"
+            placeholder="My european adventure!"
             formControlName="tripName"
             required
           />
@@ -22,6 +24,19 @@
             Please enter a name
           </mat-error>
         </mat-form-field>
+        <!-- TRIP TYPE FUNCTIONALITY -UNFINISHED -->
+        <!-- <mat-form-field>
+          <mat-label>Type</mat-label>
+          <input
+            matInput
+            placeholder="Roadtrip"
+            formControlName="tripType"
+            required
+          />
+          <mat-error *ngIf="stepOneGroup.hasError('required')">
+            Please enter a trip type
+          </mat-error>
+        </mat-form-field> -->
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
@@ -46,14 +61,15 @@
               placeholder="Type a continent..."
               formControlName="continentCtrl"
               #continentInput
-              [matAutocomplete]="auto"
+              [matAutocomplete]="continentAuto"
+              [matAutocompletePosition]="autoFillPosition"
               [matChipInputFor]="chipListContinent"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               (matChipInputTokenEnd)="addContinent($event)"
             />
           </mat-chip-list>
           <mat-autocomplete
-            #auto="matAutocomplete"
+            #continentAuto="matAutocomplete"
             (optionSelected)="selectedContinent($event)"
           >
             <mat-option
@@ -80,21 +96,22 @@
               placeholder="Type a country..."
               formControlName="countryCtrl"
               #countryInput
-              [matAutocomplete]="auto"
+              [matAutocomplete]="countryAuto"
+              [matAutocompletePosition]="autoFillPosition"
               [matChipInputFor]="chipListCountry"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               (matChipInputTokenEnd)="addCountry($event)"
             />
           </mat-chip-list>
           <mat-autocomplete
-            #auto="matAutocomplete"
+            #countryAuto="matAutocomplete"
             (optionSelected)="selectedCountry($event)"
           >
             <mat-option
               *ngFor="let country of filteredCountries | async"
               [value]="country"
             >
-              {{ country[1] }}
+              {{ country[1].name }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -106,20 +123,23 @@
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
+      <ng-template matStepLabel>Finish creating your trip</ng-template>
+      <p>Is this trip information correct?</p>
+      <p>{{ stepOneGroup.controls["tripName"].value }}</p>
+      <p *ngFor="let cont of continentsSelected">{{ cont }}</p>
+      <p *ngFor="let country of countriesSelected">{{ country }}</p>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="submitForm()">Create</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>
 
     <!-- Icon overrides. -->
-    <ng-template matStepperIcon="phone">
+    <!-- <ng-template matStepperIcon="phone">
       <mat-icon>call_end</mat-icon>
     </ng-template>
     <ng-template matStepperIcon="chat">
       <mat-icon>forum</mat-icon>
-    </ng-template>
+    </ng-template> -->
   </mat-stepper>
 </div>
