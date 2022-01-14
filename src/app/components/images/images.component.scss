@@ -1,0 +1,16 @@
+.images-component-container {
+    width: 20%;
+    background-color: grey;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.images-container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}

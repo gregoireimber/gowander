@@ -29,19 +29,22 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 // Component imports
-import { HomeComponent } from './home/home.component';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './components/home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 // Service Imports
 import { AuthService } from './services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NewTripComponent } from './new-trip/new-trip.component';
+import { NewTripComponent } from './components/new-trip/new-trip.component';
 import { MessagingService } from './services/messaging.service';
 import { AuthGuard } from './guards/auth.guard';
 import { TripService } from './services/trip.service';
+import { ImagesComponent } from './components/images/images.component';
+import { ImageService } from './services/image.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,7 @@ import { TripService } from './services/trip.service';
     LoginComponent,
     DashboardComponent,
     NewTripComponent,
+    ImagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,8 +79,9 @@ import { TripService } from './services/trip.service';
     AngularFireAuthModule,
     AngularFireStorageModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [AuthService, MessagingService, AuthGuard, TripService],
+  providers: [AuthService, MessagingService, AuthGuard, TripService, ImageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

@@ -2,8 +2,8 @@ import { Component, HostListener, OnChanges, OnDestroy, OnInit } from '@angular/
 import { Subscription } from 'rxjs';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { MessagingService } from '../services/messaging.service';
+import { AuthService } from '../../services/auth.service';
+import { MessagingService } from '../../services/messaging.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
