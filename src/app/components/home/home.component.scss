@@ -3,16 +3,15 @@ $tablet-width: 768px;
 $desktop-width: 1024px;
 
 .home-container {
-  display: block;
   position: relative;
   width: 100%;
 }
 
 .content-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: fit-content;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-between;
+  // height: fit-content;
   width: 100%;
 
   .content-img {
@@ -21,16 +20,22 @@ $desktop-width: 1024px;
     opacity: 35%;
   }
 
-  .content-two {
-    text-align: center;
-    width: 40%;
+  .buttons-container {
+    // text-align: center;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 50px;
+    gap: 20px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
 
     .auth-button {
-      width: 60%;
+      width: 300px;
       margin: 0 auto;
     }
   }
@@ -64,8 +69,11 @@ $desktop-width: 1024px;
       width: 100%;
     }
 
-    .content-two {
+    .buttons-container {
       width: 100%;
+      .auth-button {
+        width: 200px;
+      }
     }
   }
 }
