@@ -8,26 +8,26 @@
         alt=""
       />
     </div>
+    <div class="buttons-container">
+        <button
+          mat-flat-button
+          color="primary"
+          class="auth-button"
+          (click)="onLogInPressed()"
+        >
+          Log In
+        </button>
+        <button
+          mat-flat-button
+          color="secondary"
+          class="auth-button"
+          (click)="onSignUpPressed()"
+        >
+          Sign Up
+        </button>
+    </div>
   </div>
-  <div class="content-two">
-      <button
-        mat-flat-button
-        color="primary"
-        class="auth-button"
-        (click)="onLogInPressed()"
-      >
-        Log In
-      </button>
-      <button
-        mat-flat-button
-        color="secondary"
-        class="auth-button"
-        (click)="onSignUpPressed()"
-      >
-        Sign Up
-      </button>
-  </div>
-  <div class="content-container second">
+  <!-- <div class="content-container second">
     <div class="content-two">More information about the company</div>
     <div class="content-img">
       <img
@@ -35,7 +35,7 @@
         alt=""
       />
     </div>
-  </div>
+  </div> -->
 </div>
 
 <div class="footer-container-main">
