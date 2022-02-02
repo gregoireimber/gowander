@@ -38,7 +38,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 // Service Imports
 import { AuthService } from './services/auth.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewTripComponent } from './components/new-trip/new-trip.component';
 import { MessagingService } from './services/messaging.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -90,6 +90,8 @@ import { ExploreComponent } from './components/explore/explore.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     AuthService,

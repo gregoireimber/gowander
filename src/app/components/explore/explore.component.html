@@ -1,1 +1,20 @@
 <app-navbar></app-navbar>
+
+<div class="explore-component-container">
+  <div class="explore-input-container">
+    <input
+      type="text"
+      name="exploreSearch"
+      [(ngModel)]="exploreSearch"
+      (keydown.enter)="onSearch()"
+      placeholder="Where do you want to explore..."
+      class="w-1/3 py-2 border-b-2 border-gray-600 outline-none focus:border-blue-400"
+    />
+    <button mat-button (click)="onSearch()"><mat-icon>search</mat-icon></button>
+  </div>
+</div>
+
+<!-- This will need to go in an images component - will need an input -->
+<div *ngFor="let image of searchImages">
+  <img src="{{ image.urls.small }}" alt="{{ image.alt_description }}" />
+</div>
