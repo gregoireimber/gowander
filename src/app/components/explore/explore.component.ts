@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-explore',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExploreComponent implements OnInit {
 
-  constructor() { }
+  public exploreSearch = '';
+  public searchImages: any;
+
+  constructor(private imageService: ImageService) { }
 
   ngOnInit(): void {
+    
+  }
+
+  public async onSearch(): Promise<void> {
+    this.searchImages = await this.imageService.getPhotosForKeyword(this.exploreSearch);
   }
 
 }
