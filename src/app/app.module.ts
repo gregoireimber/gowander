@@ -27,6 +27,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
 
 // Component imports
 import { HomeComponent } from './components/home/home.component';
@@ -45,6 +46,10 @@ import { TripService } from './services/trip.service';
 import { ImagesComponent } from './components/images/images.component';
 import { ImageService } from './services/image.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MyTripsComponent } from './components/my-trips/my-trips.component';
+import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
+import { SocialComponent } from './components/social/social.component';
+import { ExploreComponent } from './components/explore/explore.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +61,10 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     NewTripComponent,
     ImagesComponent,
+    MyTripsComponent,
+    TripDetailComponent,
+    SocialComponent,
+    ExploreComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,8 +89,15 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireStorageModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatCardModule,
   ],
-  providers: [AuthService, MessagingService, AuthGuard, TripService, ImageService],
+  providers: [
+    AuthService,
+    MessagingService,
+    AuthGuard,
+    TripService,
+    ImageService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

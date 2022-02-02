@@ -1,21 +1,20 @@
 <app-navbar></app-navbar>
 
 <div class="dashboard-container">
-
   <div *ngIf="loading" class="centre-loader">
     <div
-      class="
-        animate-spin
-        rounded-full
-        h-24
-        w-24
-        border-t-4 border-b-4 border-black
-      "
+      class="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-black"
     ></div>
   </div>
 
   <ng-container *ngIf="!loading">
-    <h1 class="header-message">{{ userInformation.firstName }}'s Dashboard</h1>
+    <h1 class="header-message">{{ userInformation.firstName }}'s Trips:</h1>
+
+    <div class="dashboard-content-container">
+      <div class="my-trips-container">
+        <app-my-trips (tripSelected)="onTripSelected($event)"></app-my-trips>
+      </div>
+    </div>
 
     <div class="button-container">
       <button class="mdc-fab" aria-label="Add" (click)="onAdd()">
@@ -23,8 +22,5 @@
         <span class="mdc-fab__icon material-icons">add</span>
       </button>
     </div>
-
-    <app-images></app-images>
-    <!-- <button (click)="getUserTrips()">GET</button> -->
   </ng-container>
 </div>

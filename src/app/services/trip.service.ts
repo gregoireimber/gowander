@@ -9,56 +9,95 @@ import { MessagingService } from './messaging.service';
 export class TripService {
   constructor(
     private db: AngularFirestore,
-    private messageServ: MessagingService
+    private messageServ: MessagingService,
+    private authService: AuthService
   ) {}
 
-  public createNewTrip(data: TripData): void {
-    this.db
+  public async createNewTrip(data: TripData): Promise<void> {
+    // Add new trip to 'trips' collection
+    let newDocId: string = '';
+
+    await this.db
       .collection('trips')
-      .doc()
-      .set({ data })
-      .then(() => {
-        this.messageServ.emitSuccessMessage('Trip successfully created.');
+      .add({ data })
+      .then((result: any) => {
+        if (result.id) {
+          newDocId = result.id;
+          this.messageServ.emitSuccessMessage('Trip successfully created.');
+        }
       })
       .catch((error: any) => {
-        console.log('error', error);
         this.messageServ.emitErrorMessage('Error creating new trip.');
       });
+
+    // Get the user
+    const userId = this.authService.getUserId() ?? 'null';
+    if (userId === 'null')
+      this.messageServ.emitErrorMessage('Cannot find logged in user');
+
+    // Get the current trips for that user
+    let currentUserTrips: any[] = [];
+    const userSnapshot = await this.db
+      .collection('users')
+      .doc(userId)
+      .get()
+      .toPromise();
+    const userData: any = userSnapshot.data();
+    currentUserTrips = userData.trips;
+
+    // Add the new trip to the array
+    currentUserTrips.push(newDocId);
+
+    // Update the user information with this new array
+    this.db
+      .collection('users')
+      .doc(userId)
+      .update({
+        trips: currentUserTrips,
+      })
+      .then(() => this.messageServ.emitSuccessMessage('Trip linked to user.'))
+      .catch(() =>
+        this.messageServ.emitErrorMessage('Error linking trip to user.')
+      );
   }
 
-  public async getTripsForUser(userId: string): Promise<any[]> {
-    const tripSnapshot = this.db
-      .collection('trips', (ref) => ref.where('data.linkedUsers', '==', userId))
-      .doc()
+  public async getTripsForUser(userId: string): Promise<any> {
+    // Get the current user trips
+    let currentUserTrips: any[] = [];
+    const userSnapshot = await this.db
+      .collection('users')
+      .doc(userId)
       .get()
-      .subscribe({next: (data: any) => {
-        console.log('data', data.get());
-      }})
-    
-      console.log(tripSnapshot);
+      .toPromise();
+    const userData: any = userSnapshot.data();
+    currentUserTrips = userData.trips;
 
-    // afs.collection('items', ref => {
-    //   let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-    //   if (size) { query = query.where('size', '==', size) };
-    //   if (color) { query = query.where('color', '==', color) };
-    //   return query;
-    // }).valueChanges()
+    // Return the data for each of the user trips
+    // Use promise then map to ensure i await results
+    const currentUserTripsData: any[] = [];
+    await Promise.all(
+      currentUserTrips.map(async (trip: string) => {
+        const myTripsSnapshot = await this.db
+          .collection('trips')
+          .doc(trip)
+          .get()
+          .toPromise();
 
-    //const querySnapshot = await getDocs(q);
-    //do i need a userId here??
-    // const tripSnapshot = await this.db
-    //   .collection('trips')
-    //   .doc()
-    //   .get()
-    //   .toPromise();
-    //    console.log(tripSnapshot.data());
+        const data: any = myTripsSnapshot.data();
+        currentUserTripsData.push(Object.values(data));
+      })
+    );
 
-    return [];
+    // Store in the local storage
+    localStorage.setItem(
+      'userTrips',
+      JSON.stringify({
+        tripsData: currentUserTripsData,
+        userId: userId,
+      })
+    );
 
-
-    // const userTrips: any[] = [];
-    // userTrips.push(tripSnapshot.data());
-    // return userTrips;
+    return currentUserTripsData;
   }
 }
 
