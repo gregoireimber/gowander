@@ -11,16 +11,19 @@ import { TripService } from '../../services/trip.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  public loading = false;
+  public isLoggedIn = false;
+  public userInformation: any = '';
+
+  public isTripSelected = false;
+  public selectedTrip: any = undefined;
+
   constructor(
     private router: Router,
     private authService: AuthService,
     public dialog: MatDialog,
-    private tripService: TripService,
+    private tripService: TripService
   ) {}
-
-  public loading = false;
-  public isLoggedIn = false;
-  public userInformation: any = '';
 
   ngOnInit(): void {
     this.loading = true;
@@ -32,10 +35,11 @@ export class DashboardComponent implements OnInit {
   }
 
   public onAdd(): void {
-    const dialogRef = this.dialog.open(NewTripComponent, {
-      data: { name: 'hi' },
-    });
+    const dialogRef = this.dialog.open(NewTripComponent);
 
+    // dialogRef.afterClosed().subscribe({next: (isCreated: boolean) => {
+    //   if (isCreated) this.refreshMyTrips = true;
+    // }})
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed');
     //   this.animal = result;
@@ -52,10 +56,11 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  public getUserTrips() {
-    const userId = this.authService.getUserId() ?? 'null';
-    this.tripService.getTripsForUser(userId);
-    console.log(this.tripService.getTripsForUser(userId));
+  public onTripSelected(data: any): void {
+    if (data) {
+      this.isTripSelected = true;
+      this.selectedTrip = data;
+    }
   }
 }
 

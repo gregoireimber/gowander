@@ -183,6 +183,7 @@ export class NewTripComponent implements OnInit {
     console.log(this.countriesSelected, this.continentsSelected);
 
     this.tripService.createNewTrip(tripData);
+    this.dialogRef.close();
   }
 
   private _filterContinent(name: any): any[] {

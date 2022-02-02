@@ -133,6 +133,7 @@ export class AuthService {
 
     // Clear the local storage
     localStorage.removeItem('userData');
+    localStorage.removeItem('userTrips');
 
     // Clear the token expiration timer when you logout
     if (this.tokenExpirationTimer) {
