@@ -13,13 +13,12 @@ export class ImageService {
 
   public unsplashBaseUrl = 'https://api.unsplash.com/';
 
-  //photos/?client_id=YOUR_ACCESS_KEY
-
   public async getPhotosForKeyword(word: string): Promise<any[]> {
+    const accessKey = 'vrdeeovPtNJ3JeNn00Wzg-3Nr1j3YSkU7UnsSAof3tU';
     const url =
       this.unsplashBaseUrl +
       'search/photos?' +
-      `page=1&query=${word}&orientation=landscape&client_id=vrdeeovPtNJ3JeNn00Wzg-3Nr1j3YSkU7UnsSAof3tU`;
+      `page=1&query=${word}&orientation=landscape&client_id=${accessKey}`;
 
     const urlResult = await this.http.get(url).toPromise();
 
