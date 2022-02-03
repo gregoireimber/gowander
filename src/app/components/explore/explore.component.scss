@@ -3,34 +3,42 @@ $tablet-width: 768px;
 $desktop-width: 1024px;
 
 .explore-images-container {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    height: 300px;
-    margin-top: 30px;
-    margin-left: 25px;
-    margin-right: 25px;
-    gap: 25px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  height: 300px;
+  margin-top: 30px;
+  margin-left: 25px;
+  margin-right: 25px;
+  gap: 25px;
 
-    .image-card {
-        // flex: 0 0 auto;
-    }
+  .image-card {
+    // flex: 0 0 auto;
+  }
+}
+
+.no-images {
+  height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .explore-input-container {
-    width: 100%;
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
 
-    input {
-        min-width: 200px;
-    }
+  input {
+    min-width: 200px;
+  }
 }
 
 // Phone
 @media (max-width: #{$tablet-width - 1px}) {
-    .explore-images-container {
-        height: 150px;
-    }
+  .explore-images-container {
+    height: 150px;
+  }
 }

@@ -19,7 +19,7 @@ export class ImagesComponent implements OnInit {
   public getPhotosForKeyword() {
     const word = 'porsche';
 
-    this.imageService.getPhotosForKeyword(word).then((data: any[]) => {
+    this.imageService.getPhotosForKeyword(word, 1).then((data: any[]) => {
       this.imagesForKeyword = data;
       this.showImages = true;
     });

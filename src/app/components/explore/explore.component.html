@@ -12,11 +12,18 @@
   <button mat-button (click)="onSearch()"><mat-icon>search</mat-icon></button>
 </div>
 
-<div class="explore-images-container">
+<div class="explore-images-container" *ngIf="imagesLoaded">
   <img
     class="shadow-lg rounded"
     *ngFor="let image of searchImages"
     src="{{ image.urls.regular }}"
     alt="{{ image.alt_description }}"
+    (click)="onImageClick(image)"
   />
+  <button mat-button (click)="loadMoreImages()"><mat-icon>navigate_next</mat-icon></button>
 </div>
+
+<div *ngIf="noImages" class="no-images">
+  <p>There are no images for this search term :(</p>
+</div>
+
