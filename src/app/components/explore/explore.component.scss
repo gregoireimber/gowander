@@ -1,5 +1,20 @@
-.explore-component-container {
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
 
+.explore-images-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    height: 300px;
+    margin-top: 30px;
+    margin-left: 25px;
+    margin-right: 25px;
+    gap: 25px;
+
+    .image-card {
+        // flex: 0 0 auto;
+    }
 }
 
 .explore-input-container {
@@ -10,5 +25,12 @@
 
     input {
         min-width: 200px;
+    }
+}
+
+// Phone
+@media (max-width: #{$tablet-width - 1px}) {
+    .explore-images-container {
+        height: 150px;
     }
 }
