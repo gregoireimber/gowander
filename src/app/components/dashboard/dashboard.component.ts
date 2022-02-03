@@ -36,14 +36,6 @@ export class DashboardComponent implements OnInit {
 
   public onAdd(): void {
     const dialogRef = this.dialog.open(NewTripComponent);
-
-    // dialogRef.afterClosed().subscribe({next: (isCreated: boolean) => {
-    //   if (isCreated) this.refreshMyTrips = true;
-    // }})
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   this.animal = result;
-    // });
   }
 
   public async getUserInfo() {
