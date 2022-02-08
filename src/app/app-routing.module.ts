@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { SocialComponent } from './components/social/social.component';
 import { ExploreComponent } from './components/explore/explore.component';
+import { NewTripComponent } from './components/new-trip/new-trip.component';
 
 // Eventually redirect to a log in / sign up page
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'social', component: SocialComponent, canActivate: [AuthGuard] },
   { path: 'explore', component: ExploreComponent, canActivate: [AuthGuard] },
+  { path: 'new-trip', component: NewTripComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

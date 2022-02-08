@@ -1,9 +1,18 @@
-
-
-.step-two-input {
+.new-trip-container{
+  margin-top: 1.5rem;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .step-two-input {
+    width: 100%;
+  }
+  
+  .step-three-input {
+    width: 100%;
+  }
 }
 
-.step-three-input {
-  width: 100%;
+.mat-step-icon-selected {
+
 }
