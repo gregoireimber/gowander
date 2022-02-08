@@ -2,6 +2,7 @@ import { StepperOrientation } from '@angular/cdk/stepper';
 import {
   Component,
   ElementRef,
+  HostListener,
   Inject,
   OnInit,
   ViewChild,
@@ -12,8 +13,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NewTripData } from '../dashboard/dashboard.component';
 import { continents, countries, getEmojiFlag } from 'countries-list';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -30,7 +29,7 @@ import { TripData, TripService } from '../../services/trip.service';
 })
 export class NewTripComponent implements OnInit {
   public isLinear = false;
-  public orientation: StepperOrientation = 'vertical';
+  public orientation: StepperOrientation = 'horizontal';
   public autoFillPosition: 'auto' | 'above' | 'below' = 'below';
 
   public continentList: any[] = Object.entries(continents);
@@ -38,7 +37,9 @@ export class NewTripComponent implements OnInit {
   public filteredContinents: Observable<any[]>;
 
   public separatorKeysCodes: number[] = [ENTER, COMMA];
-  @ViewChild('continentInput') continentInput:| ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('continentInput') continentInput:
+    | ElementRef<HTMLInputElement>
+    | undefined;
 
   public filteredCountries: Observable<any[]>;
   public countryList: any[] = [];
@@ -62,13 +63,22 @@ export class NewTripComponent implements OnInit {
     reservations: new FormControl(''),
   });
 
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+    if (window.innerWidth < 768) {
+      this.orientation = 'vertical';
+    } else {
+      this.orientation = 'horizontal';
+    }
+  }
+
   constructor(
-    public dialogRef: MatDialogRef<NewTripComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: NewTripData,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private tripService: TripService,
+    private tripService: TripService
   ) {
+    this.getScreenSize();
+    
     this.stepOneGroup = this.formBuilder.group({
       tripName: ['', Validators.required],
       //tripType: ['', Validators.required],
@@ -88,11 +98,10 @@ export class NewTripComponent implements OnInit {
       startWith(''),
       map((value: any) => this._filterCountry(value))
     );
-
   }
 
   ngOnInit(): void {
-    console.log('this is the input data from the parent dtata', this.data);
+    // console.log('this is the input data from the parent dtata', this.data);
   }
 
   public removeContinent(cont: string): void {
@@ -142,7 +151,6 @@ export class NewTripComponent implements OnInit {
     Object.entries(countries).find((c) => {
       if (continentCodeArray.includes(c[1].continent)) this.countryList.push(c);
     });
-
   }
 
   public removeCountry(country: string): void {
@@ -178,12 +186,12 @@ export class NewTripComponent implements OnInit {
       type: 'Roadtrip',
       continents: this.continentsSelected,
       countries: this.countriesSelected,
-      linkedUsers: [loggedInUser], 
+      linkedUsers: [loggedInUser],
     };
     console.log(this.countriesSelected, this.continentsSelected);
 
     this.tripService.createNewTrip(tripData);
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
   private _filterContinent(name: any): any[] {
@@ -200,7 +208,7 @@ export class NewTripComponent implements OnInit {
   private _filterCountry(name: any): any[] {
     if (name.countryCtrl && typeof name.countryCtrl === 'string') {
       const filterValue = name.countryCtrl.toLowerCase();
-      return this.countryList.filter((option: any) => 
+      return this.countryList.filter((option: any) =>
         option[1].name.toLowerCase().includes(filterValue)
       );
     } else {

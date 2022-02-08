@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NewTripComponent } from '../new-trip/new-trip.component';
 import { AuthService } from '../../services/auth.service';
 import { TripService } from '../../services/trip.service';
+import { NewComponent } from '../new/new.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,8 +22,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    public dialog: MatDialog,
-    private tripService: TripService
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public onAdd(): void {
-    const dialogRef = this.dialog.open(NewTripComponent);
+    this.dialog.open(NewComponent, {width: '250px', autoFocus: false});
   }
 
   public async getUserInfo() {

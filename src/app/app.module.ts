@@ -50,6 +50,8 @@ import { MyTripsComponent } from './components/my-trips/my-trips.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 import { SocialComponent } from './components/social/social.component';
 import { ExploreComponent } from './components/explore/explore.component';
+import { NewBucketListComponent } from './components/new-bucket-list/new-bucket-list.component';
+import { NewComponent } from './components/new/new.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { ExploreComponent } from './components/explore/explore.component';
     TripDetailComponent,
     SocialComponent,
     ExploreComponent,
+    NewBucketListComponent,
+    NewComponent,
   ],
   imports: [
     BrowserModule,
