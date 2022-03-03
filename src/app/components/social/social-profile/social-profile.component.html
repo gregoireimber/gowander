@@ -1,0 +1,34 @@
+<div class="social-profile-container">
+  <div class="name-container">
+    <img
+      src="../../../../assets/images/dummy-profile.png"
+      alt="Dummy Profile Picture"
+      class="profile-picture"
+    />
+    <h2 (click)="openProfileView()">
+      {{ profileData.firstName }}&nbsp;{{ profileData.lastName }}
+    </h2>
+  </div>
+
+  <div class="friends-container">
+    <p>
+      {{ profileData.friends.length ?? 0 }}&nbsp;{{
+        profileData.friends.length === 1 ? "Friend" : "Friends"
+      }}
+    </p>
+  </div>
+
+  <!-- Change the matBadge number for the amount of notifications - this will be a change for the future -->
+  <div class="profile-actions">
+    <div class="action">
+      <mat-icon matBadge="15" matBadgeColor="warn" matBadgeSize="small"
+        >notifications</mat-icon
+      >
+      <button mat-button (click)="openNotifications()">Notifications</button>
+    </div>
+    <div class="action">
+      <mat-icon>settings</mat-icon>
+      <button mat-button (click)="openSettings()">Settings</button>
+    </div>
+  </div>
+</div>

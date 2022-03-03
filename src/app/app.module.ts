@@ -28,6 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
+import {MatBadgeModule} from '@angular/material/badge';
 
 // Component imports
 import { HomeComponent } from './components/home/home.component';
@@ -52,6 +53,11 @@ import { SocialComponent } from './components/social/social.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { NewBucketListComponent } from './components/new-bucket-list/new-bucket-list.component';
 import { NewComponent } from './components/new/new.component';
+import { SocialMainComponent } from './components/social/social-main/social-main.component';
+import { SocialFriendsComponent } from './components/social/social-friends/social-friends.component';
+import { SocialProfileComponent } from './components/social/social-profile/social-profile.component';
+import { ProfileViewModalComponent } from './components/social/profile-view-modal/profile-view-modal.component';
+import { SocialService } from './services/social.service';
 
 @NgModule({
   declarations: [
@@ -69,6 +75,10 @@ import { NewComponent } from './components/new/new.component';
     ExploreComponent,
     NewBucketListComponent,
     NewComponent,
+    SocialMainComponent,
+    SocialFriendsComponent,
+    SocialProfileComponent,
+    ProfileViewModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +96,7 @@ import { NewComponent } from './components/new/new.component';
     MatStepperModule,
     MatSnackBarModule,
     MatChipsModule,
+    MatBadgeModule,
     MatAutocompleteModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -103,6 +114,7 @@ import { NewComponent } from './components/new/new.component';
     AuthGuard,
     TripService,
     ImageService,
+    SocialService,
   ],
   bootstrap: [AppComponent],
 })

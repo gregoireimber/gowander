@@ -1,0 +1,10 @@
+.social-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 50px;
+
+  app-social-main {
+    width: 50%;
+  }
+}
