@@ -52,6 +52,9 @@ import { SocialComponent } from './components/social/social.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { NewBucketListComponent } from './components/new-bucket-list/new-bucket-list.component';
 import { NewComponent } from './components/new/new.component';
+import { SocialMainComponent } from './components/social/social-main/social-main.component';
+import { SocialFriendsComponent } from './components/social/social-friends/social-friends.component';
+import { SocialProfileComponent } from './components/social/social-profile/social-profile.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,9 @@ import { NewComponent } from './components/new/new.component';
     ExploreComponent,
     NewBucketListComponent,
     NewComponent,
+    SocialMainComponent,
+    SocialFriendsComponent,
+    SocialProfileComponent,
   ],
   imports: [
     BrowserModule,
