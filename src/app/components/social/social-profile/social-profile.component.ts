@@ -12,4 +12,8 @@ export class SocialProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public openProfileView(): void {
+    // Open the profile modal
+  }
+
 }

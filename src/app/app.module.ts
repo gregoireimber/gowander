@@ -55,6 +55,7 @@ import { NewComponent } from './components/new/new.component';
 import { SocialMainComponent } from './components/social/social-main/social-main.component';
 import { SocialFriendsComponent } from './components/social/social-friends/social-friends.component';
 import { SocialProfileComponent } from './components/social/social-profile/social-profile.component';
+import { ProfileViewModalComponent } from './components/social/profile-view-modal/profile-view-modal.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { SocialProfileComponent } from './components/social/social-profile/socia
     SocialMainComponent,
     SocialFriendsComponent,
     SocialProfileComponent,
+    ProfileViewModalComponent,
   ],
   imports: [
     BrowserModule,
