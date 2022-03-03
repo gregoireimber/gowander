@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile-view-modal',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileViewModalComponent implements OnInit {
 
-  constructor() { }
+
+  public profileData: any;
+
+  constructor(private dialogRef: MatDialogRef<ProfileViewModalComponent>, @Inject(MAT_DIALOG_DATA) public data: ProfileViewModalComponentData) {
+    this.profileData = data.profileData;
+   }
 
   ngOnInit(): void {
+    console.log(this.profileData);
   }
 
+}
+
+export interface ProfileViewModalComponentData {
+  profileData: any;
 }

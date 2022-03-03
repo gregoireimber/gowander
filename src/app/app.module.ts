@@ -28,6 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
+import {MatBadgeModule} from '@angular/material/badge';
 
 // Component imports
 import { HomeComponent } from './components/home/home.component';
@@ -56,6 +57,7 @@ import { SocialMainComponent } from './components/social/social-main/social-main
 import { SocialFriendsComponent } from './components/social/social-friends/social-friends.component';
 import { SocialProfileComponent } from './components/social/social-profile/social-profile.component';
 import { ProfileViewModalComponent } from './components/social/profile-view-modal/profile-view-modal.component';
+import { SocialService } from './services/social.service';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,7 @@ import { ProfileViewModalComponent } from './components/social/profile-view-moda
     MatStepperModule,
     MatSnackBarModule,
     MatChipsModule,
+    MatBadgeModule,
     MatAutocompleteModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -111,6 +114,7 @@ import { ProfileViewModalComponent } from './components/social/profile-view-moda
     AuthGuard,
     TripService,
     ImageService,
+    SocialService,
   ],
   bootstrap: [AppComponent],
 })
