@@ -21,7 +21,7 @@ export class SocialService {
         .collection<any>('users', (ref) => {
           return ref.where('email', '==', searchTerm);
         })
-        .get().toPromise(), 'lolj');
+        .valueChanges().toPromise(), 'lolj');
 
     return this.db
       .collection<any>('users', (ref) => {
