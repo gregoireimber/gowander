@@ -1,13 +1,20 @@
 <app-navbar></app-navbar>
 
-<div class="social-container">
+<div class="social-container" *ngIf="!isMobile; else mobile">
   <!-- NEED to add some mobile friendly stuff here -->
 
   <app-social-profile></app-social-profile>
-  
-  <app-social-main></app-social-main>
-  
-  <app-social-friends></app-social-friends>
 
+  <app-social-main></app-social-main>
+
+  <app-social-friends></app-social-friends>
 </div>
 
+<ng-template #mobile>
+  <app-mobile-social-tabs (selectedTabEmitter)="changeTab($event)">
+  </app-mobile-social-tabs>
+  
+  <app-social-profile *ngIf="selectedTab === 'account'"></app-social-profile>
+  <app-social-main *ngIf="selectedTab === 'feed'"></app-social-main>
+  <app-social-friends *ngIf="selectedTab === 'friends'"></app-social-friends>
+</ng-template>
