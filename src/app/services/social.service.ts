@@ -15,17 +15,9 @@ export class SocialService {
 
   // TODO: add return types and stronger types
   public async getUsers(searchTerm: string) {
-    console.log(searchTerm);
-
-    console.log(this.db
-        .collection<any>('users', (ref) => {
-          return ref.where('email', '==', searchTerm);
-        })
-        .valueChanges().toPromise(), 'lolj');
-
     return this.db
       .collection<any>('users', (ref) => {
-        return ref.where('email', '==', searchTerm);
+        return ref.where('username', '==', searchTerm);
       })
       .valueChanges();
   }

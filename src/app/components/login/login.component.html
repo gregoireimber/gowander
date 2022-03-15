@@ -36,7 +36,7 @@
       <mat-form-field>
         <mat-label>Password</mat-label>
         <input type="password" matInput [formControl]="passwordFormControl" />
-        <mat-error *ngIf="emailFormControl.hasError('required')">
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
           Password is <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -109,6 +109,21 @@
           </mat-error>
           <mat-error *ngIf="emailFormControl.hasError('required')">
             Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input type="username" matInput [formControl]="usernameFormControl" />
+          <mat-error
+            *ngIf="
+            usernameFormControl.hasError('minlength') &&
+              !usernameFormControl.hasError('required')
+            "
+          >
+            Password needs at least <strong>3 characters</strong>
+          </mat-error>
+          <mat-error *ngIf="usernameFormControl.hasError('required')">
+            Username is <strong>required</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field>

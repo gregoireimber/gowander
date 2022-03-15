@@ -1,5 +1,5 @@
 import { Component, HostListener, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, pipe } from 'rxjs';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
     Validators.required,
     Validators.email,
   ]);
+  usernameFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+  ]);
   firstNameFormControl = new FormControl('', [Validators.required]);
   lastNameFormControl = new FormControl('', [Validators.required]);
 
@@ -37,11 +41,13 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
   private password: string = '';
   private firstName: string = '';
   private lastName: string = '';
+  private username: string = '';
 
   public emailSubscription: Subscription;
   public passwordSubscription: Subscription;
   public firstNameSubscription: Subscription;
   public lastNameSubscription: Subscription;
+  public usernameSubscription: Subscription;
 
   public loading = false;
   public isLogin = true;
@@ -61,6 +67,12 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
     this.passwordSubscription = this.passwordFormControl.valueChanges.subscribe(
       (password: string) => {
         this.password = password;
+      }
+    );
+
+    this.usernameSubscription = this.usernameFormControl.valueChanges.subscribe(
+      (username: string) => {
+        this.username = username;
       }
     );
 
@@ -109,24 +121,37 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
       });
   }
 
-  public onSignUp(): void {
+  public async onSignUp(): Promise<void> {
     this.loading = true;
 
-    const signUpInfo = {
-      firstName: this.firstName.trim(),
-      lastName: this.lastName.trim(),
-      email: this.email.trim(),
-      password: this.password.trim(),
-    };
+    let isValidUsername = undefined;
 
-    this.authService
-      .emailSignUp(signUpInfo)
-      .then(() => {
+    (await this.authService.isValidUsername(this.username)).subscribe({next: (result) => {
+      isValidUsername = !result;
+
+      if (isValidUsername) {
+        const signUpInfo = {
+          firstName: this.firstName.trim(),
+          lastName: this.lastName.trim(),
+          email: this.email.trim(),
+          username: this.username.trim(),
+          password: this.password.trim(),
+        };
+    
+        this.authService
+          .emailSignUp(signUpInfo)
+          .then(() => {
+            this.loading = false;
+          })
+          .catch((error) => {
+            this.messageServ.emitErrorMessage(error.message);
+          });
+      } else {
+        // If not a valid username, give the user an error
         this.loading = false;
-      })
-      .catch((error) => {
-        this.messageServ.emitErrorMessage(error.message);
-      });
+        this.messageServ.emitErrorMessage('This username already exists :(')
+      }
+    }});
   }
 
   ngOnDestroy(): void {
