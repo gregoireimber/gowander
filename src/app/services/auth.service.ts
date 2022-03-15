@@ -69,6 +69,7 @@ export class AuthService {
             firstName: signUpInfo.firstName,
             lastName: signUpInfo.lastName,
             email: signUpInfo.email,
+            username: signUpInfo.username,
             trips: [],
             friends: [],
             incomingFR: [],
@@ -205,5 +206,12 @@ export class AuthService {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logOut();
     }, expirationDuration);
+  }
+
+  public async isValidUsername(username: string) {
+    return this.db.collection<any>('users', (ref) => {
+      return ref.where('username', '==', username)
+    })
+    .valueChanges()
   }
 }

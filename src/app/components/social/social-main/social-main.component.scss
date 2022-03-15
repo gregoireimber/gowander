@@ -6,4 +6,15 @@
     input {
       min-width: 200px;
     }
+}
+
+.search-result-container {
+  width: 100%;
+  padding-left: 10%;
+
+  .search-result {
+    font-size: large;
+    font-weight: 500;
+    
   }
+}
