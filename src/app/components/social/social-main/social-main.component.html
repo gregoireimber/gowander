@@ -4,12 +4,16 @@
     name="socialSearch"
     [(ngModel)]="socialSearchTerm"
     (keydown.enter)="onSearch()"
-    placeholder="Search a user using their e-mail address (e.g test@test.com)"
+    placeholder="Search using username (e.g gowanderer123)..."
     class="w-3/4 py-2 border-b-2 border-gray-600 outline-none focus:border-blue-400"
   />
   <button mat-button (click)="onSearch()"><mat-icon>search</mat-icon></button>
 </div>
-<div *ngIf="!!searchResult.username" class="search-result-container">
+<div
+  *ngIf="!!searchResult.username"
+  class="search-result-container"
+  (click)="onSearchResultClicked($event)"
+>
   <div class="search-result">
     {{ searchResult.firstName }}&nbsp;{{ searchResult.lastName }} -
     {{ searchResult.username }}

@@ -1,4 +1,10 @@
-import { Component, HostListener, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Subscription, pipe } from 'rxjs';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,13 +16,20 @@ import { MessagingService } from '../../services/messaging.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnChanges, OnDestroy {
-
   @HostListener('window:resize', ['$event'])
   private onResize(event: any) {
     if (event.target.innerWidth < 1024) {
       this.isMobile = true;
     } else {
       this.isMobile = false;
+    }
+  }
+
+  // Listen to the enter key
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.code === 'Enter') {
+      this.onLogIn();
     }
   }
 
@@ -86,7 +99,6 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
         this.lastName = lastName;
       }
     );
-
   }
 
   ngOnInit(): void {
@@ -126,32 +138,34 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
 
     let isValidUsername = undefined;
 
-    (await this.authService.isValidUsername(this.username)).subscribe({next: (result) => {
-      isValidUsername = !result;
+    (await this.authService.isValidUsername(this.username)).subscribe({
+      next: (result) => {
+        isValidUsername = !result;
 
-      if (isValidUsername) {
-        const signUpInfo = {
-          firstName: this.firstName.trim(),
-          lastName: this.lastName.trim(),
-          email: this.email.trim(),
-          username: this.username.trim(),
-          password: this.password.trim(),
-        };
-    
-        this.authService
-          .emailSignUp(signUpInfo)
-          .then(() => {
-            this.loading = false;
-          })
-          .catch((error) => {
-            this.messageServ.emitErrorMessage(error.message);
-          });
-      } else {
-        // If not a valid username, give the user an error
-        this.loading = false;
-        this.messageServ.emitErrorMessage('This username already exists :(')
-      }
-    }});
+        if (isValidUsername) {
+          const signUpInfo = {
+            firstName: this.firstName.trim(),
+            lastName: this.lastName.trim(),
+            email: this.email.trim(),
+            username: this.username.trim(),
+            password: this.password.trim(),
+          };
+
+          this.authService
+            .emailSignUp(signUpInfo)
+            .then(() => {
+              this.loading = false;
+            })
+            .catch((error) => {
+              this.messageServ.emitErrorMessage(error.message);
+            });
+        } else {
+          // If not a valid username, give the user an error
+          this.loading = false;
+          this.messageServ.emitErrorMessage('This username already exists :(');
+        }
+      },
+    });
   }
 
   ngOnDestroy(): void {
