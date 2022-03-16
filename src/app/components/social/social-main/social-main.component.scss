@@ -1,20 +1,47 @@
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
 .social-search-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  
-    input {
-      min-width: 200px;
-    }
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  input {
+    min-width: 200px;
+  }
 }
 
 .search-result-container {
-  width: 100%;
-  padding-left: 10%;
+  width: 50%;
+  margin-top: 5px;
+  margin-left: 10%;
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0,0,0,.051);
+  cursor: pointer;
 
   .search-result {
     font-size: large;
     font-weight: 500;
-    
+  }
+}
+
+.search-result-container:hover {
+  background-color: rgb(201, 201, 201);
+}
+
+// Phone
+@media (max-width: #{$tablet-width - 1px}) {
+  .social-search-container {
+    margin-top: 2rem;
+  }
+}
+
+// Tablet
+@media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+  .social-search-container {
+    margin-top: 2rem;
   }
 }

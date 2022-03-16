@@ -30,4 +30,8 @@ export class SocialMainComponent implements OnInit {
       },
     });
   }
+
+  public onSearchResultClicked(data: any): void {
+    console.log('data',data);
+  }
 }
