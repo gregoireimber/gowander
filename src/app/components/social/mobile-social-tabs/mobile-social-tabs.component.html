@@ -1,11 +1,23 @@
 <div class="mobile-tabs-container">
-  <div class="icon-container" [class.selected-tab]="selectedTab === 'account'">
-    <mat-icon (click)="onTabClicked('account')" fontSet="material-icons-outlined">account_circle</mat-icon>
+  <div
+    class="icon-container"
+    [class.selected-tab]="selectedTab === 'account'"
+    (click)="onTabClicked('account')"
+  >
+    <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
   </div>
-  <div class="icon-container" [class.selected-tab]="selectedTab === 'feed'">
-    <mat-icon (click)="onTabClicked('feed')" fontSet="material-icons-outlined">feed</mat-icon>
+  <div
+    class="icon-container"
+    [class.selected-tab]="selectedTab === 'feed'"
+    (click)="onTabClicked('feed')"
+  >
+    <mat-icon fontSet="material-icons-outlined">feed</mat-icon>
   </div>
-  <div class="icon-container" [class.selected-tab]="selectedTab === 'friends'">
-    <mat-icon (click)="onTabClicked('friends')" fontSet="material-icons-outlined">people</mat-icon>
+  <div
+    class="icon-container"
+    [class.selected-tab]="selectedTab === 'friends'"
+    (click)="onTabClicked('friends')"
+  >
+    <mat-icon fontSet="material-icons-outlined">people</mat-icon>
   </div>
 </div>

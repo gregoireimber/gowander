@@ -1,19 +1,24 @@
 .mobile-tabs-container {
+  width: 100%;
+  height: 3rem;
+
+  display: flex;
+  justify-content: space-around;
+
+  .icon-container {
+    height: 100%;
     width: 100%;
-    height: 3rem;
-
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
 
-    .icon-container {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  .icon-container:hover {
+    border-bottom: 2px solid black;
+  }
 
-    }
-    .selected-tab {
-        border-bottom: 2px solid black;
-    }
+  .selected-tab {
+    border-bottom: 2px solid black;
+  }
 }
