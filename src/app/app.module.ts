@@ -28,7 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 
 // Component imports
 import { HomeComponent } from './components/home/home.component';
@@ -59,6 +59,7 @@ import { SocialProfileComponent } from './components/social/social-profile/socia
 import { ProfileViewModalComponent } from './components/social/profile-view-modal/profile-view-modal.component';
 import { SocialService } from './services/social.service';
 import { MobileSocialTabsComponent } from './components/social/mobile-social-tabs/mobile-social-tabs.component';
+import { SettingsModalComponent } from './components/social/settings-modal/settings-modal.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { MobileSocialTabsComponent } from './components/social/mobile-social-tab
     SocialProfileComponent,
     ProfileViewModalComponent,
     MobileSocialTabsComponent,
+    SettingsModalComponent,
   ],
   imports: [
     BrowserModule,

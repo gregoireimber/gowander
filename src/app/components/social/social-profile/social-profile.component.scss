@@ -18,7 +18,9 @@ $desktop-width: 1024px;
     }
 
     .profile-picture {
+      object-fit: cover;
       width: 50px;
+      height: 50px;
       border: 2px solid black;
       border-radius: 50%;
     }
@@ -45,25 +47,24 @@ $desktop-width: 1024px;
 
 // Phone
 @media (max-width: #{$tablet-width - 1px}) {
-    .social-profile-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 2rem;
-    
-        .name-container {
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-start;
-          gap: 15px;
-        }
+  .social-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
 
-        // MOre styling needed here
-        .friends-container {
+    .name-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 15px;
+    }
 
-            // justify-self: flex-start;
-        }
-      }
+    // MOre styling needed here
+    .friends-container {
+      // justify-self: flex-start;
+    }
+  }
 }
 
 // Tablet
@@ -81,5 +82,4 @@ $desktop-width: 1024px;
       gap: 15px;
     }
   }
-
 }
