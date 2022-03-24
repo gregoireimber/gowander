@@ -59,6 +59,7 @@ import { SocialProfileComponent } from './components/social/social-profile/socia
 import { ProfileViewModalComponent } from './components/social/profile-view-modal/profile-view-modal.component';
 import { SocialService } from './services/social.service';
 import { MobileSocialTabsComponent } from './components/social/mobile-social-tabs/mobile-social-tabs.component';
+import { SettingsModalComponent } from './components/social/settings-modal/settings-modal.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { MobileSocialTabsComponent } from './components/social/mobile-social-tab
     SocialProfileComponent,
     ProfileViewModalComponent,
     MobileSocialTabsComponent,
+    SettingsModalComponent,
   ],
   imports: [
     BrowserModule,

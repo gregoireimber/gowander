@@ -13,7 +13,7 @@ export class ProfileViewModalComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<ProfileViewModalComponent>, @Inject(MAT_DIALOG_DATA) public data: ProfileViewModalComponentData) {
     this.profileData = data.profileData;
-   }
+  }
 
   ngOnInit(): void {
     console.log(this.profileData);
