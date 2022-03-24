@@ -15,7 +15,8 @@ export class SocialProfileComponent implements OnInit {
   public profileData: any;
 
   // This will most likely be a part of profileData in the future when it is saved against a profile
-  public profilePicturePath = '../../../../assets/images/dummy-profile.png';
+  public defaultProfilePicturePath =
+    '../../../../assets/images/dummy-profile.png';
 
   async ngOnInit(): Promise<void> {
     const loggedInUserId = this.authService.getUserId();
@@ -43,7 +44,7 @@ export class SocialProfileComponent implements OnInit {
     this.dialog.open(SettingsModalComponent, {
       data: {
         profileData: this.profileData,
-        profilePicturePath: this.profilePicturePath,
+        defaultProfilePicturePath: this.defaultProfilePicturePath,
       },
     });
   }

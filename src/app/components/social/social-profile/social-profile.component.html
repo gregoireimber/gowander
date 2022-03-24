@@ -1,9 +1,9 @@
 <div class="social-profile-container" *ngIf="profileData">
   <div class="name-container">
     <img
-    src="{{ profilePicturePath }}"
-    alt="Dummy Profile Picture"
-    class="profile-picture"
+      src="{{ profileData.profilePictureUrl ?? defaultProfilePicturePath }}"
+      alt="Profile Picture"
+      class="profile-picture"
     />
     <h2 (click)="openProfileView()">
       {{ profileData.firstName }}&nbsp;{{ profileData.lastName }}

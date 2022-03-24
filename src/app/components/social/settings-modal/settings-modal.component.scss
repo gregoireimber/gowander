@@ -34,7 +34,9 @@ $desktop-width: 1024px;
       align-items: center;
 
       .profile-picture-image {
+        object-fit: cover;
         width: 40px;
+        height: 40px;
         border: 2px solid black;
         border-radius: 50%;
       }

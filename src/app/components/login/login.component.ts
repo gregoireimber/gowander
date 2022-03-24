@@ -140,7 +140,7 @@ export class LoginComponent implements OnInit, OnChanges, OnDestroy {
 
     (await this.authService.isValidUsername(this.username)).subscribe({
       next: (result) => {
-        isValidUsername = !result;
+        isValidUsername = !result.length;
 
         if (isValidUsername) {
           const signUpInfo = {

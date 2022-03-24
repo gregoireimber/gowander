@@ -209,9 +209,10 @@ export class AuthService {
   }
 
   public async isValidUsername(username: string) {
-    return this.db.collection<any>('users', (ref) => {
-      return ref.where('username', '==', username)
-    })
-    .valueChanges()
+    return this.db
+      .collection<any>('users', (ref) => {
+        return ref.where('username', '==', username);
+      })
+      .valueChanges();
   }
 }

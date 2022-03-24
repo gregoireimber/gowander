@@ -6,12 +6,19 @@
   <div class="modal-content">
     <div class="profile-picture">
       <img
-        src="{{ profilePicturePath }}"
+        src="{{ profileData.profilePictureUrl ?? defaultProfilePicturePath }}"
         alt="Dummy Profile Picture"
         class="profile-picture-image"
       />
       <p>Update your profile picture</p>
     </div>
+
+    <input
+      type="file"
+      id="file"
+      (change)="uploadProfilePicture($event)"
+      name="image"
+    />
   </div>
 
   <div class="modal-actions"></div>
