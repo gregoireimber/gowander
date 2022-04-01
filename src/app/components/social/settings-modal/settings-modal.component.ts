@@ -14,6 +14,8 @@ export class SettingsModalComponent implements OnInit {
   public profileData: any;
   public loggedInUserId: string | undefined;
 
+  public progressBar = false;
+
   constructor(
     private dialogRef: MatDialogRef<SettingsModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SettingsModalComponentData,
@@ -42,24 +44,22 @@ export class SettingsModalComponent implements OnInit {
       upload.subscribe({
         next: (url) => {
           if (url) {
-            // Can now do a loader or a spinner instead of the messageservice
-            // if (url.bytesTransferred === 0) {
-            //   this.messageServ.emitSuccessMessage('Upload started');
-            // } else if (url.bytesTransferred === url.totalBytes) {
-            //   this.messageServ.emitSuccessMessage('Upload finished!');
-            // }
+            this.progressBar = true;
 
             if (url.bytesTransferred === url.totalBytes) {
-              this.profileData = this.authService
-                .getUserInformation(this.loggedInUserId)
-                .then((response: any) => {
-                  return response;
-                });
+              this.progressBar = false;
+              this.reloadData();
             }
           }
         },
       });
     }
+  }
+
+  private async reloadData(): Promise<void> {
+    this.profileData = await this.authService.getUserInformation(
+      this.loggedInUserId
+    );
   }
 }
 

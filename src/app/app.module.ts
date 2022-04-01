@@ -29,6 +29,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // Component imports
 import { HomeComponent } from './components/home/home.component';
@@ -111,6 +112,7 @@ import { SettingsModalComponent } from './components/social/settings-modal/setti
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
   ],
   providers: [
     AuthService,
