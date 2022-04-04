@@ -3,7 +3,18 @@
 <div class="new-trip-container">
   <h2>Start Planning Your Trip</h2>
 
-  <mat-stepper [orientation]="orientation" [linear]="isLinear" #stepper>
+  <div class="trip-type-container">
+    <div class="trip-type">
+      <img src="../../../assets/graphics/road.svg" alt="" class="svg" />
+      <p>Road Trip</p>
+    </div>
+    <div class="trip-type">
+      <img src="../../../assets/graphics/train.svg" alt="" class="svg" />
+      <p>Other Trip</p>
+    </div>
+  </div>
+
+  <!-- <mat-stepper [orientation]="orientation" [linear]="isLinear" #stepper>
     <mat-step [stepControl]="stepOneGroup">
       <form [formGroup]="stepOneGroup">
         <ng-template matStepLabel
@@ -20,9 +31,9 @@
           <mat-error *ngIf="stepOneGroup.hasError('required')">
             Please enter a name
           </mat-error>
-        </mat-form-field>
-        <!-- TRIP TYPE FUNCTIONALITY -UNFINISHED -->
-        <!-- <mat-form-field>
+        </mat-form-field> -->
+  <!-- TRIP TYPE FUNCTIONALITY -UNFINISHED -->
+  <!-- <mat-form-field>
           <mat-label>Type</mat-label>
           <input
             matInput
@@ -34,7 +45,7 @@
             Please enter a trip type
           </mat-error>
         </mat-form-field> -->
-        <div>
+  <!-- <div>
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
@@ -129,14 +140,14 @@
         <button mat-button (click)="submitForm()">Create</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
-    </mat-step>
+    </mat-step> -->
 
-    <!-- Icon overrides. -->
-    <!-- <ng-template matStepperIcon="phone">
+  <!-- Icon overrides. -->
+  <!-- <ng-template matStepperIcon="phone">
       <mat-icon>call_end</mat-icon>
     </ng-template>
     <ng-template matStepperIcon="chat">
       <mat-icon>forum</mat-icon>
     </ng-template> -->
-  </mat-stepper>
+  <!-- </mat-stepper> -->
 </div>

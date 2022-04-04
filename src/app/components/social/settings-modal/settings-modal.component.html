@@ -19,6 +19,13 @@
       (change)="uploadProfilePicture($event)"
       name="image"
     />
+
+    <mat-progress-bar
+      *ngIf="progressBar"
+      mode="indeterminate"
+    ></mat-progress-bar>
+
+    <p>{{ profileData.profilePictureUrl }}</p>
   </div>
 
   <div class="modal-actions"></div>

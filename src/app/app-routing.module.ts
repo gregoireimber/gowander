@@ -8,13 +8,16 @@ import { SocialComponent } from './components/social/social.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { NewTripComponent } from './components/new-trip/new-trip.component';
 
-// Eventually redirect to a log in / sign up page
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'social', component: SocialComponent, canActivate: [AuthGuard] },
   { path: 'explore', component: ExploreComponent, canActivate: [AuthGuard] },
   { path: 'new-trip', component: NewTripComponent, canActivate: [AuthGuard] },
