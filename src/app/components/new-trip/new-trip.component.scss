@@ -4,6 +4,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .trip-type-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+
+    .trip-type {
+      border: 1px solid black;
+      border-radius: 10px;
+      text-align: center;
+
+      p {
+        margin: 1rem 0;
+        font-size: x-large;
+        font-weight: 700;
+      }
+
+      .svg {
+        border-radius: 10px;
+        width: 20rem;
+      }
+    }
+
+    .trip-type:hover {
+      opacity: 50%;
+      cursor: pointer;
+    }
+
+  }
+
   .step-two-input {
     width: 100%;
   }

@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public onAdd(): void {
-    this.dialog.open(NewComponent, {width: '250px', autoFocus: false});
+    this.dialog.open(NewComponent, { width: '250px', autoFocus: false });
   }
 
   public async getUserInfo() {
