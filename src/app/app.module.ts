@@ -30,6 +30,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 // Component imports
 import { HomeComponent } from './components/home/home.component';
@@ -61,6 +63,9 @@ import { ProfileViewModalComponent } from './components/social/profile-view-moda
 import { SocialService } from './services/social.service';
 import { MobileSocialTabsComponent } from './components/social/mobile-social-tabs/mobile-social-tabs.component';
 import { SettingsModalComponent } from './components/social/settings-modal/settings-modal.component';
+import { NewTripTypeSelectComponent } from './components/new-trip/new-trip-type-select/new-trip-type-select.component';
+import { NewTripRegionSelectComponent } from './components/new-trip/new-trip-region-select/new-trip-region-select.component';
+import { NewTripInformationComponent } from './components/new-trip/new-trip-information/new-trip-information.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +89,9 @@ import { SettingsModalComponent } from './components/social/settings-modal/setti
     ProfileViewModalComponent,
     MobileSocialTabsComponent,
     SettingsModalComponent,
+    NewTripTypeSelectComponent,
+    NewTripRegionSelectComponent,
+    NewTripInformationComponent,
   ],
   imports: [
     BrowserModule,
@@ -113,6 +121,8 @@ import { SettingsModalComponent } from './components/social/settings-modal/setti
     FormsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     AuthService,

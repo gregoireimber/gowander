@@ -1,0 +1,42 @@
+<div class="trip-info-container">
+  <div class="step-text-container">
+    <h2>More information</h2>
+  </div>
+
+  <div class="date-select-container">
+    <div class="date-select-input">
+      <mat-label>Choose a date range for your trip (MM/DD/YYYY)</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input
+          matStartDate
+          placeholder="Start date"
+          [(ngModel)]="tripStartDate"
+        />
+        <input matEndDate placeholder="End date" [(ngModel)]="tripEndDate" />
+      </mat-date-range-input>
+    </div>
+    <div class="date-select-toggle">
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+    </div>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </div>
+
+  <div class="allowance-input-container">
+    Allowance
+    <select name="currency">
+      <option value="dollar">$</option>
+      <option value="dollar">£</option>
+      <option value="dollar">€</option>
+    </select>
+    <input type="number" />
+  </div>
+
+  <div class="reservations-container">Reservations</div>
+
+  <div class="actions-container">
+    <button class="gw-button secondary" (click)="goBack()">Back</button>
+    <button class="gw-button primary" (click)="goNext()">Next</button>
+  </div>
+</div>

@@ -102,13 +102,17 @@ export class TripService {
 }
 
 export interface TripData {
-  name: string;
-  type: string;
-  continents: string[];
-  countries: string[];
-  linkedUsers: string[];
-  dates?: Date[];
+  name?: string;
+  type?: TripType;
+  otherType?: string;
+  continents?: string[];
+  countries?: string[];
+  linkedUsers?: string[];
+  dates?: TripDates;
   bucketList?: string[]; // might need more information but keep as string for now
   allowance?: string; // String for now - will need to think about this
   reservations?: string[]; // Again will need to think about this
 }
+
+export type TripType = 'ROAD' | 'BEACH' | 'SKI' | 'CITY' | 'OTHER';
+export type TripDates = { start: Date; end: Date };

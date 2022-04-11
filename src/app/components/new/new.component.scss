@@ -3,4 +3,19 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+
+    button {
+        width: 100%;
+    }
+}
+
+:host ::ng-deep .mat-button-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+
+    p {
+        margin: 0;
+    }
 }

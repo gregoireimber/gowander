@@ -1,0 +1,40 @@
+.trip-info-container {
+  width: 700px;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .step-text-container {
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .date-select-container {
+    display: flex;
+    gap: 1rem;
+
+    .date-select-input {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .date-select-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  .allowance-input-container {
+    padding: 0.5rem;
+  }
+
+  .actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

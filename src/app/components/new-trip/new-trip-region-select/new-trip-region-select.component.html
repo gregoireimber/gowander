@@ -1,0 +1,83 @@
+<div class="region-select-container">
+  <div class="step-text-container">
+    <h2>Region and countries</h2>
+  </div>
+
+  <form [formGroup]="regionFormGroup" class="region-form">
+    <mat-form-field class="continent-input">
+      <mat-label>Continents</mat-label>
+      <mat-chip-list #chipListContinent aria-label="Continent selection">
+        <mat-chip
+          *ngFor="let continent of continentsSelected"
+          (removed)="removeContinent(continent)"
+        >
+          {{ continent }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          placeholder="Type a continent..."
+          formControlName="continentCtrl"
+          #continentInput
+          [matAutocomplete]="continentAuto"
+          [matAutocompletePosition]="'below'"
+          [matChipInputFor]="chipListContinent"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="addContinent($event)"
+        />
+      </mat-chip-list>
+      <mat-autocomplete
+        #continentAuto="matAutocomplete"
+        (optionSelected)="selectedContinent($event)"
+      >
+        <mat-option
+          *ngFor="let continent of filteredContinents | async"
+          [value]="continent"
+        >
+          {{ continent[1] }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="country-input">
+      <mat-label>Countries</mat-label>
+      <mat-chip-list #chipListCountry aria-label="Country selection">
+        <mat-chip
+          *ngFor="let country of countriesSelected"
+          (removed)="removeCountry(country)"
+        >
+          {{ country }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input
+          placeholder="Type a country..."
+          formControlName="countryCtrl"
+          #countryInput
+          [matAutocomplete]="countryAuto"
+          [matAutocompletePosition]="'below'"
+          [matChipInputFor]="chipListCountry"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="addCountry($event)"
+        />
+      </mat-chip-list>
+      <mat-autocomplete
+        #countryAuto="matAutocomplete"
+        (optionSelected)="selectedCountry($event)"
+      >
+        <mat-option
+          *ngFor="let country of filteredCountries | async"
+          [value]="country"
+        >
+          {{ country[1].name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+  <div class="actions-container">
+    <button class="gw-button secondary" (click)="goBack()">Back</button>
+    <button class="gw-button primary" (click)="goNext()">Next</button>
+  </div>
+</div>

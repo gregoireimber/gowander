@@ -1,0 +1,33 @@
+.region-select-container {
+  width: 700px;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .step-text-container {
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .region-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    // Maybe have some styling to the inputs? - might be useful for mobile
+    .continent-input {
+    }
+
+    .country-input {
+    }
+  }
+
+  .actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

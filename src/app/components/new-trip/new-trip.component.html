@@ -3,151 +3,30 @@
 <div class="new-trip-container">
   <h2>Start Planning Your Trip</h2>
 
-  <div class="trip-type-container">
-    <div class="trip-type">
-      <img src="../../../assets/graphics/road.svg" alt="" class="svg" />
-      <p>Road Trip</p>
-    </div>
-    <div class="trip-type">
-      <img src="../../../assets/graphics/train.svg" alt="" class="svg" />
-      <p>Other Trip</p>
-    </div>
+  <div class="progress">
+    <mat-progress-bar
+      mode="determinate"
+      [value]="progressValue"
+    ></mat-progress-bar>
   </div>
 
-  <!-- <mat-stepper [orientation]="orientation" [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="stepOneGroup">
-      <form [formGroup]="stepOneGroup">
-        <ng-template matStepLabel
-          >Set a name and type for your trip</ng-template
-        >
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input
-            matInput
-            placeholder="My european adventure!"
-            formControlName="tripName"
-            required
-          />
-          <mat-error *ngIf="stepOneGroup.hasError('required')">
-            Please enter a name
-          </mat-error>
-        </mat-form-field> -->
-  <!-- TRIP TYPE FUNCTIONALITY -UNFINISHED -->
-  <!-- <mat-form-field>
-          <mat-label>Type</mat-label>
-          <input
-            matInput
-            placeholder="Roadtrip"
-            formControlName="tripType"
-            required
-          />
-          <mat-error *ngIf="stepOneGroup.hasError('required')">
-            Please enter a trip type
-          </mat-error>
-        </mat-form-field> -->
-  <!-- <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="stepTwoGroup">
-      <form [formGroup]="stepTwoGroup">
-        <ng-template matStepLabel>Set a region for your trip</ng-template>
-        <mat-form-field class="step-two-input">
-          <mat-label>Continents</mat-label>
-          <mat-chip-list #chipListContinent aria-label="Continent selection">
-            <mat-chip
-              *ngFor="let continent of continentsSelected"
-              (removed)="removeContinent(continent)"
-            >
-              {{ continent }}
-              <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip>
-            <input
-              placeholder="Type a continent..."
-              formControlName="continentCtrl"
-              #continentInput
-              [matAutocomplete]="continentAuto"
-              [matAutocompletePosition]="autoFillPosition"
-              [matChipInputFor]="chipListContinent"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="addContinent($event)"
-            />
-          </mat-chip-list>
-          <mat-autocomplete
-            #continentAuto="matAutocomplete"
-            (optionSelected)="selectedContinent($event)"
-          >
-            <mat-option
-              *ngFor="let continent of filteredContinents | async"
-              [value]="continent"
-            >
-              {{ continent[1] }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <mat-form-field class="step-three-input">
-          <mat-label>Countries</mat-label>
-          <mat-chip-list #chipListCountry aria-label="Country selection">
-            <mat-chip
-              *ngFor="let country of countriesSelected"
-              (removed)="removeCountry(country)"
-            >
-              {{ country }}
-              <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip>
-            <input
-              placeholder="Type a country..."
-              formControlName="countryCtrl"
-              #countryInput
-              [matAutocomplete]="countryAuto"
-              [matAutocompletePosition]="autoFillPosition"
-              [matChipInputFor]="chipListCountry"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="addCountry($event)"
-            />
-          </mat-chip-list>
-          <mat-autocomplete
-            #countryAuto="matAutocomplete"
-            (optionSelected)="selectedCountry($event)"
-          >
-            <mat-option
-              *ngFor="let country of filteredCountries | async"
-              [value]="country"
-            >
-              {{ country[1].name }}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
+  <div class="step-container">
+    <app-new-trip-type-select
+      *ngIf="step === 1"
+      (nextStepEmitter)="onStepChangeFwd($event, 2)"
+    ></app-new-trip-type-select>
 
-    <mat-step>
-      <ng-template matStepLabel>Finish creating your trip</ng-template>
-      <p>Is this trip information correct?</p>
-      <p>{{ stepOneGroup.controls["tripName"].value }}</p>
-      <p *ngFor="let cont of continentsSelected">{{ cont }}</p>
-      <p *ngFor="let country of countriesSelected">{{ country }}</p>
-      <div>
-        <button mat-button (click)="submitForm()">Create</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step> -->
+    <app-new-trip-region-select
+      *ngIf="step === 2"
+      (previousStepEmitter)="onStepChangeBckwd(1)"
+      (nextStepEmitter)="onStepChangeFwd($event, 3)"
+    ></app-new-trip-region-select>
 
-  <!-- Icon overrides. -->
-  <!-- <ng-template matStepperIcon="phone">
-      <mat-icon>call_end</mat-icon>
-    </ng-template>
-    <ng-template matStepperIcon="chat">
-      <mat-icon>forum</mat-icon>
-    </ng-template> -->
-  <!-- </mat-stepper> -->
+    <app-new-trip-information
+      *ngIf="step === 3"
+      (previousStepEmitter)="onStepChangeBckwd(2)"
+      (nextStepEmitter)="onStepChangeFwd($event, 4)"
+    >
+    </app-new-trip-information>
+  </div>
 </div>
