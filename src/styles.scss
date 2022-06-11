@@ -110,3 +110,7 @@ mat-datepicker-content
     background-color: #8c9d8c;
   }
 }
+
+.gw-button:disabled {
+  background-color: rgb(196, 196, 196);
+}

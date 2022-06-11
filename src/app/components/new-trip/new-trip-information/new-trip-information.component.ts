@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { TripAllowance } from 'src/app/services/trip.service';
+import { TripAllowance, TripService } from 'src/app/services/trip.service';
 
 @Component({
   selector: 'app-new-trip-information',
   templateUrl: './new-trip-information.component.html',
   styleUrls: ['./new-trip-information.component.scss'],
 })
-export class NewTripInformationComponent {
+export class NewTripInformationComponent implements OnInit {
   // Component emitters
   @Output() public previousStepEmitter = new EventEmitter<void>();
   @Output() public nextStepEmitter =
@@ -18,10 +18,7 @@ export class NewTripInformationComponent {
   public endDateFormControl = new FormControl(null);
 
   // Allowance
-  public currencySelected: { name: 'USD' | 'EUR' | 'GBP'; value: string } = {
-    name: 'GBP',
-    value: '£',
-  };
+  public currencySelected: string | undefined = undefined;
 
   public currencies: { name: 'USD' | 'EUR' | 'GBP'; value: string }[] = [
     { name: 'GBP', value: '£' },
@@ -29,10 +26,24 @@ export class NewTripInformationComponent {
     { name: 'EUR', value: '€' },
   ];
 
+  // Change the type later
+  public allCurrencies: string[] = [];
+  public showMoreCurrencies = false;
+
   public allowanceAmount: number | undefined;
 
   // Reservations
   public reservations = '';
+
+  constructor(private tripService: TripService) {}
+
+  ngOnInit(): void {
+    this.tripService.getCurrencies().subscribe({
+      next: (data) => {
+        this.allCurrencies = Object.keys(data);
+      },
+    });
+  }
 
   public goBack(): void {
     this.previousStepEmitter.emit();
@@ -43,9 +54,13 @@ export class NewTripInformationComponent {
       tripStartDate: this.startDateFormControl.value,
       tripEndDate: this.endDateFormControl.value,
       allowanceAmount: this.allowanceAmount,
-      allowanceCurrency: this.currencySelected.name,
+      allowanceCurrency: this.currencySelected,
       reservations: this.reservations,
     });
+  }
+
+  public get validateStep(): boolean {
+    return !!this.startDateFormControl.value && !!this.endDateFormControl.value;
   }
 }
 
@@ -53,6 +68,6 @@ type informationComponentOutput = {
   tripStartDate: Date | undefined;
   tripEndDate: Date | undefined;
   allowanceAmount: number | undefined;
-  allowanceCurrency: 'USD' | 'EUR' | 'GBP';
+  allowanceCurrency: string | undefined;
   reservations: string;
 };

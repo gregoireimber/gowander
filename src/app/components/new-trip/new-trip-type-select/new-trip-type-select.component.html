@@ -41,7 +41,11 @@
 
   <!-- Do I even need a next button if they will just click on the images -->
   <div class="step-actions-container">
-    <button class="gw-button primary" (click)="goToStep2('OTHER', true)">
+    <button
+      class="gw-button primary"
+      [disabled]="!showOtherText || !otherText"
+      (click)="goToStep2('OTHER', true)"
+    >
       <div
         *ngIf="nextLoading; else buttonText"
         class="animate-spin rounded-full h-7 w-7 border-t-4 border-b-4 border-white"

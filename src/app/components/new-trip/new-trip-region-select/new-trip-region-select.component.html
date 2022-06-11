@@ -78,6 +78,12 @@
 
   <div class="actions-container">
     <button class="gw-button secondary" (click)="goBack()">Back</button>
-    <button class="gw-button primary" (click)="goNext()">Next</button>
+    <button
+      class="gw-button primary"
+      (click)="goNext()"
+      [disabled]="!continentsSelected.length || !countriesSelected.length"
+    >
+      Next
+    </button>
   </div>
 </div>

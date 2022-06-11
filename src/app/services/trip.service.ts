@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from './auth.service';
 import { MessagingService } from './messaging.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +12,14 @@ export class TripService {
   constructor(
     private db: AngularFirestore,
     private messageServ: MessagingService,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {}
+
+  // Get list of all currencies from API
+  public getCurrencies(): Observable<any> {
+    return this.http.get('https://openexchangerates.org/api/currencies.json');
+  }
 
   public async createNewTrip(data: TripData): Promise<void> {
     // Add new trip to 'trips' collection

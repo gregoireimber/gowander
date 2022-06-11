@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SocialComponent } from './components/social/social.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { NewTripComponent } from './components/new-trip/new-trip.component';
+import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,6 +22,11 @@ const routes: Routes = [
   { path: 'social', component: SocialComponent, canActivate: [AuthGuard] },
   { path: 'explore', component: ExploreComponent, canActivate: [AuthGuard] },
   { path: 'new-trip', component: NewTripComponent, canActivate: [AuthGuard] },
+  {
+    path: 'coming-soon',
+    component: ComingSoonComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

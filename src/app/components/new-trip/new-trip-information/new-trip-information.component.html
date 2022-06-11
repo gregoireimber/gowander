@@ -32,12 +32,21 @@
 
   <div class="currency-container">
     <p>Select a Currency:</p>
-    <mat-radio-group class="radio-buttons">
-      <mat-radio-button value="1">GBP £</mat-radio-button>
-      <mat-radio-button value="2">EUR €</mat-radio-button>
-      <mat-radio-button value="3">USD $</mat-radio-button>
-      <mat-radio-button value="4">Other</mat-radio-button>
+    <mat-radio-group class="radio-buttons" [(ngModel)]="currencySelected">
+      <mat-radio-button value="'GBP'">GBP £</mat-radio-button>
+      <mat-radio-button value="'EUR'">EUR €</mat-radio-button>
+      <mat-radio-button value="'USD'">USD $</mat-radio-button>
+      <mat-radio-button (click)="showMoreCurrencies = true"
+        >Other</mat-radio-button
+      >
     </mat-radio-group>
+    <div *ngIf="showMoreCurrencies">
+      <select [(ngModel)]="currencySelected">
+        <option *ngFor="let currency of allCurrencies" value="{{ currency }}">
+          {{ currency }}
+        </option>
+      </select>
+    </div>
   </div>
 
   <div class="allowance-input-container">
@@ -51,6 +60,12 @@
 
   <div class="actions-container">
     <button class="gw-button secondary" (click)="goBack()">Back</button>
-    <button class="gw-button primary" (click)="goNext()">Next</button>
+    <button
+      class="gw-button primary"
+      (click)="goNext()"
+      [disabled]="!validateStep"
+    >
+      Next
+    </button>
   </div>
 </div>

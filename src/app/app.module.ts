@@ -69,6 +69,7 @@ import { NewTripRegionSelectComponent } from './components/new-trip/new-trip-reg
 import { NewTripInformationComponent } from './components/new-trip/new-trip-information/new-trip-information.component';
 import { NewTripNameComponent } from './components/new-trip/new-trip-name/new-trip-name.component';
 import { NewTripCompleteComponent } from './components/new-trip/new-trip-complete/new-trip-complete.component';
+import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { NewTripCompleteComponent } from './components/new-trip/new-trip-complet
     NewTripInformationComponent,
     NewTripNameComponent,
     NewTripCompleteComponent,
+    ComingSoonComponent,
   ],
   imports: [
     BrowserModule,

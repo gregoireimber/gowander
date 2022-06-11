@@ -15,8 +15,12 @@ export class NewComponent {
 
   // this currently isn't working
   public onTripPressed(): void {
-    console.log('here');
     this.router.navigateByUrl('/new-trip');
+    this.dialogRef.close();
+  }
+
+  public onBucketListPressed(): void {
+    this.router.navigateByUrl('/coming-soon');
     this.dialogRef.close();
   }
 }
