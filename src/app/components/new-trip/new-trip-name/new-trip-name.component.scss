@@ -2,7 +2,7 @@
 $tablet-width: 768px;
 $desktop-width: 1024px;
 
-.region-select-container {
+.name-container {
   width: 700px;
   margin-top: 2rem;
   display: flex;
@@ -15,17 +15,16 @@ $desktop-width: 1024px;
     }
   }
 
-  .region-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-
-    // Maybe have some styling to the inputs? - might be useful for mobile
-    .continent-input {
+  .name-input-container {
+    input {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border: 1px solid green;
+      border-radius: 3px;
     }
 
-    .country-input {
+    p {
+      color: red;
     }
   }
 
@@ -38,11 +37,18 @@ $desktop-width: 1024px;
 
 // Phone
 @media (max-width: #{$tablet-width - 1px}) {
-  .region-select-container {
+  .name-container {
     width: 350px;
 
     .step-text-container {
       margin-left: 1rem;
+    }
+
+    .name-input-container {
+      input {
+        width: 325px;
+        margin-left: 1rem;
+      }
     }
   }
 }

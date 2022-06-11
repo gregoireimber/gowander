@@ -28,5 +28,18 @@
       (nextStepEmitter)="onStepChangeFwd($event, 4)"
     >
     </app-new-trip-information>
+
+    <app-new-trip-name
+      *ngIf="step === 4"
+      (previousStepEmitter)="onStepChangeBckwd(3)"
+      (nextStepEmitter)="onStepChangeFwd($event, 5)"
+    ></app-new-trip-name>
+
+    <app-new-trip-complete
+      *ngIf="step === 5"
+      [tripData]="stepData"
+      (previousStepEmitter)="onStepChangeBckwd(4)"
+      (nextStepEmitter)="onStepChangeFwd($event, 6)"
+    ></app-new-trip-complete>
   </div>
 </div>

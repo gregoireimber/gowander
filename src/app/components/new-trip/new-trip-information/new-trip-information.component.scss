@@ -1,3 +1,7 @@
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
 .trip-info-container {
   width: 700px;
   margin-top: 2rem;
@@ -14,27 +18,69 @@
   .date-select-container {
     display: flex;
     gap: 1rem;
+    justify-content: space-between;
 
-    .date-select-input {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+    mat-form-field {
+      width: 45%;
+    }
+  }
+
+  .currency-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+
+    p {
+      margin: 0;
     }
 
-    .date-select-toggle {
+    .radio-buttons {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      gap: 1rem;
     }
   }
 
   .allowance-input-container {
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+
+    .allowance-input {
+      padding: 5px;
+      border: 1px solid black;
+      border-radius: 3px;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .reservations-container {
+    display: flex;
+    gap: 1rem;
+
+    textarea {
+      border: 1px solid grey;
+      border-radius: 3px;
+      padding: 0.5rem;
+    }
   }
 
   .actions-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+}
+
+// Phone
+@media (max-width: #{$tablet-width - 1px}) {
+  .trip-info-container {
+    width: 350px;
+    .step-text-container {
+      margin-left: 1rem;
+    }
   }
 }

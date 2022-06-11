@@ -3,37 +3,51 @@
     <h2>More information</h2>
   </div>
 
-  <div class="date-select-container">
-    <div class="date-select-input">
-      <mat-label>Choose a date range for your trip (MM/DD/YYYY)</mat-label>
-      <mat-date-range-input [rangePicker]="picker">
-        <input
-          matStartDate
-          placeholder="Start date"
-          [(ngModel)]="tripStartDate"
-        />
-        <input matEndDate placeholder="End date" [(ngModel)]="tripEndDate" />
-      </mat-date-range-input>
-    </div>
-    <div class="date-select-toggle">
+  <form class="date-select-container">
+    <mat-form-field>
+      <mat-label>Choose a start date (MM/DD/YYYY)</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [formControl]="startDateFormControl"
+      />
       <mat-datepicker-toggle matSuffix [for]="picker">
         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
       </mat-datepicker-toggle>
-    </div>
-    <mat-date-range-picker #picker></mat-date-range-picker>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Choose an end date (MM/DD/YYYY)</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker2"
+        [formControl]="endDateFormControl"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker2">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </form>
+
+  <div class="currency-container">
+    <p>Select a Currency:</p>
+    <mat-radio-group class="radio-buttons">
+      <mat-radio-button value="1">GBP £</mat-radio-button>
+      <mat-radio-button value="2">EUR €</mat-radio-button>
+      <mat-radio-button value="3">USD $</mat-radio-button>
+      <mat-radio-button value="4">Other</mat-radio-button>
+    </mat-radio-group>
   </div>
 
   <div class="allowance-input-container">
-    Allowance
-    <select name="currency">
-      <option value="dollar">$</option>
-      <option value="dollar">£</option>
-      <option value="dollar">€</option>
-    </select>
-    <input type="number" />
+    <p>Trip Allowance:</p>
+    <input
+      class="allowance-input"
+      [(ngModel)]="allowanceAmount"
+      type="number"
+    />
   </div>
-
-  <div class="reservations-container">Reservations</div>
 
   <div class="actions-container">
     <button class="gw-button secondary" (click)="goBack()">Back</button>

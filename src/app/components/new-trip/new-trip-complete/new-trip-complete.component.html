@@ -1,0 +1,34 @@
+<div class="trip-complete-container">
+  <ng-container *ngIf="!complete">
+    <div class="step-text-container">
+      <h2>Finish creating your trip - confirm the following details</h2>
+    </div>
+
+    <div class="trip-info-container">
+      <div class="trip-info">
+        <h2>{{ tripData!.name }}</h2>
+      </div>
+      <div class="trip-info">
+        <p>{{ typeString }} - {{ continentString }}</p>
+      </div>
+    </div>
+
+    <div class="actions-container">
+      <button class="gw-button secondary" (click)="goBack()">Back</button>
+      <button class="gw-button primary" (click)="goNext()">Next</button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="loading"></ng-container>
+
+  <ng-container *ngIf="complete">
+    <h2>
+      Congratulations youre going to {{ continentString }} in ... days ... hours
+      with fireworks
+    </h2>
+    <img src="../../../../assets/graphics/tick.jpg" class="tick-img" alt="" />
+    <div class="finish-button-container">
+      <button class="gw-button primary" (click)="goNext()">Finish</button>
+    </div>
+  </ng-container>
+</div>

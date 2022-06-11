@@ -55,7 +55,10 @@ export class TripService {
       .update({
         trips: currentUserTrips,
       })
-      .then(() => this.messageServ.emitSuccessMessage('Trip linked to user.'))
+      .then(() => {
+        this.messageServ.emitSuccessMessage('Trip linked to user.');
+        return;
+      })
       .catch(() =>
         this.messageServ.emitErrorMessage('Error linking trip to user.')
       );
@@ -110,9 +113,13 @@ export interface TripData {
   linkedUsers?: string[];
   dates?: TripDates;
   bucketList?: string[]; // might need more information but keep as string for now
-  allowance?: string; // String for now - will need to think about this
+  allowance?: TripAllowance;
   reservations?: string[]; // Again will need to think about this
 }
 
 export type TripType = 'ROAD' | 'BEACH' | 'SKI' | 'CITY' | 'OTHER';
-export type TripDates = { start: Date; end: Date };
+export type TripDates = { start: Date | undefined; end: Date | undefined };
+export type TripAllowance = {
+  amount: number | undefined;
+  currency: 'USD' | 'EUR' | 'GBP';
+};

@@ -42,7 +42,22 @@ export class NewTripComponent implements OnInit {
         break;
       }
       case 4: {
-        console.log();
+        this.stepData.dates = {
+          start: data.tripStartDate,
+          end: data.tripEndDate,
+        };
+        this.stepData.allowance = {
+          amount: data.allowanceAmount,
+          currency: data.allowanceCurrency,
+        };
+        this.stepData.reservations = data.reservations;
+
+        this.step = 4;
+        break;
+      }
+      case 5: {
+        this.stepData.name = data;
+        this.step = 5;
         break;
       }
       default: {

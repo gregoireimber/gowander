@@ -32,6 +32,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
 
 // Component imports
 import { HomeComponent } from './components/home/home.component';
@@ -66,6 +67,8 @@ import { SettingsModalComponent } from './components/social/settings-modal/setti
 import { NewTripTypeSelectComponent } from './components/new-trip/new-trip-type-select/new-trip-type-select.component';
 import { NewTripRegionSelectComponent } from './components/new-trip/new-trip-region-select/new-trip-region-select.component';
 import { NewTripInformationComponent } from './components/new-trip/new-trip-information/new-trip-information.component';
+import { NewTripNameComponent } from './components/new-trip/new-trip-name/new-trip-name.component';
+import { NewTripCompleteComponent } from './components/new-trip/new-trip-complete/new-trip-complete.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +95,8 @@ import { NewTripInformationComponent } from './components/new-trip/new-trip-info
     NewTripTypeSelectComponent,
     NewTripRegionSelectComponent,
     NewTripInformationComponent,
+    NewTripNameComponent,
+    NewTripCompleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,6 +128,7 @@ import { NewTripInformationComponent } from './components/new-trip/new-trip-info
     MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatRadioModule,
   ],
   providers: [
     AuthService,

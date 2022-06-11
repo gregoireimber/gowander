@@ -1,4 +1,6 @@
-// Will eventually need to add breakpoints here
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
 
 .new-trip-type-select-container {
   width: 700px;
@@ -49,4 +51,19 @@
 .step-actions-container {
   display: flex;
   justify-content: flex-end;
+}
+
+// Phone
+@media (max-width: #{$tablet-width - 1px}) {
+  .new-trip-type-select-container {
+    width: 350px;
+  }
+
+  .step-text-container {
+    margin-left: 1rem;
+  }
+
+  .trip-type-container {
+    flex-direction: column;
+  }
 }

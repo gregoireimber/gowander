@@ -47,6 +47,50 @@ mat-progress-bar {
   }
 }
 
+// Material date picker
+// TODO - change the initial date from purple to green
+
+mat-datepicker-content .mat-calendar-body-selected {
+  background-color: green;
+}
+
+mat-datepicker-content .mat-calendar-body-in-range::before {
+  background: rgba($color: green, $alpha: 0.2);
+}
+
+mat-datepicker-content
+  .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+  > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  background: rgba($color: green, $alpha: 0.3);
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: green;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-inner-circle {
+  background-color: green;
+}
+
+// For the material input in the country and continents bit
+// .mat-focused {
+//   color: green;
+// }
+// .mat-focused .mat-form-field-label {
+//   /*change color of label*/
+//   color: green;
+// }
+
+// .mat-form-field-underline {
+//   /*change color of underline*/
+//   background-color: green;
+// }
+
+// .mat-form-field-ripple {
+//   /*change color of underline when focused*/
+//   background-color: green;
+// }
+
 // Global buttons
 .gw-button {
   width: 2rem;

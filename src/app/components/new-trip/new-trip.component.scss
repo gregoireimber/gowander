@@ -1,4 +1,6 @@
-// Will eventually need to add breakpoints here
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
 
 .new-trip-container {
   margin-top: 1.5rem;
@@ -8,6 +10,7 @@
   align-items: center;
 
   .progress {
+    min-width: 300px;
     width: 40%;
   }
 
@@ -16,5 +19,14 @@
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
+  }
+}
+
+// Phone
+@media (max-width: #{$tablet-width - 1px}) {
+  .new-trip-container {
+    .step-container {
+      width: 350px;
+    }
   }
 }

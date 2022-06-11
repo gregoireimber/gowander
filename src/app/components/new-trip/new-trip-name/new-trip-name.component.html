@@ -1,0 +1,19 @@
+<div class="name-container">
+  <div class="step-text-container">
+    <h2>Name your trip</h2>
+  </div>
+
+  <div class="name-input-container">
+    <input
+      [(ngModel)]="tripName"
+      [ngStyle]="{ 'border-color': noNameError ? 'red' : 'green' }"
+      type="text"
+    />
+    <p *ngIf="noNameError">Please enter a trip name</p>
+  </div>
+
+  <div class="actions-container">
+    <button class="gw-button secondary" (click)="goBack()">Back</button>
+    <button class="gw-button primary" (click)="goNext()">Next</button>
+  </div>
+</div>
