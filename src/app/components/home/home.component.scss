@@ -4,7 +4,7 @@ $desktop-width: 1024px;
 $xl-desktop-width: 1200px;
 
 .home-container {
-  background-color: #EFECE6;
+  background-color: white;
   position: relative;
   width: 100%;
 }
@@ -41,7 +41,7 @@ $xl-desktop-width: 1200px;
     &.right {
       padding: 50px 150px 50px 0px;
     }
-    
+
     &.left {
       padding: 50px 50px 50px 150px;
     }
@@ -53,7 +53,6 @@ $xl-desktop-width: 1200px;
   width: 100vw;
 }
 
-
 // Breakpoint specific styles
 
 // Large laptop to small laptop
@@ -64,24 +63,23 @@ $xl-desktop-width: 1200px;
       &.right {
         padding: 40px 40px 40px 0px;
       }
-      
+
       &.left {
         padding: 40px;
       }
     }
   }
-  
-  
+
   .svg-camper {
     border-radius: 10px;
     width: 15rem;
   }
-  
+
   .svg-map {
     border-radius: 10px;
     width: 25rem;
   }
-  
+
   .svg-globe {
     border-radius: 10px;
     width: 25rem;
@@ -90,31 +88,29 @@ $xl-desktop-width: 1200px;
 
 // Tablet styling
 @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
-  
   .content-container {
     padding: 80px 30px;
     .text-container {
       &.right {
         padding: 30px 10px 30px 0px;
       }
-      
+
       &.left {
         padding: 30px 30px 30px 10px;
       }
     }
   }
-  
-  
+
   .svg-camper {
     border-radius: 10px;
     width: 15rem;
   }
-  
+
   .svg-map {
     border-radius: 10px;
     width: 20rem;
   }
-  
+
   .svg-globe {
     border-radius: 10px;
     width: 20rem;
@@ -123,7 +119,6 @@ $xl-desktop-width: 1200px;
 
 // Phone
 @media (max-width: #{$tablet-width - 1px}) {
-
   .home-container {
     margin-top: 1rem;
   }
@@ -149,7 +144,7 @@ $xl-desktop-width: 1200px;
       &.right {
         padding: 0;
       }
-      
+
       &.left {
         padding: 0;
       }
@@ -160,12 +155,12 @@ $xl-desktop-width: 1200px;
     border-radius: 10px;
     width: 15rem;
   }
-  
+
   .svg-map {
     border-radius: 10px;
     width: 20rem;
   }
-  
+
   .svg-globe {
     border-radius: 10px;
     width: 20rem;
