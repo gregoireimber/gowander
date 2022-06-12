@@ -25,7 +25,7 @@ export class ExploreComponent implements OnInit {
       this.exploreSearch,
       this.imagePage
     );
-    
+
     this.searchImages = [...this.searchImages, ...imageResults];
   }
 
@@ -48,7 +48,6 @@ export class ExploreComponent implements OnInit {
   }
 
   public onImageClick(image: any): void {
-    console.log(image);
     window.open(image.links.html, '_blank')!.focus();
   }
 }

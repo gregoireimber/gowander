@@ -36,6 +36,7 @@ $desktop-width: 1024px;
 
     .radio-buttons {
       display: flex;
+      flex-direction: column;
       gap: 1rem;
     }
   }

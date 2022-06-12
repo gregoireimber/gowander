@@ -28,11 +28,6 @@ export class NewTripTypeSelectComponent implements OnInit {
       return;
     }
 
-    // Go to next with the other trip type
-    if (type === 'OTHER' && next && this.showOtherText) {
-      console.log(this.otherText);
-    }
-
     this.nextStepEmitter.emit({ type, otherType: this.otherText });
   }
 }

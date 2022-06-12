@@ -18,12 +18,14 @@
 
     <app-new-trip-region-select
       *ngIf="step === 2"
+      [tripData]="stepData"
       (previousStepEmitter)="onStepChangeBckwd(1)"
       (nextStepEmitter)="onStepChangeFwd($event, 3)"
     ></app-new-trip-region-select>
 
     <app-new-trip-information
       *ngIf="step === 3"
+      [tripData]="stepData"
       (previousStepEmitter)="onStepChangeBckwd(2)"
       (nextStepEmitter)="onStepChangeFwd($event, 4)"
     >
@@ -31,6 +33,7 @@
 
     <app-new-trip-name
       *ngIf="step === 4"
+      [tripData]="stepData"
       (previousStepEmitter)="onStepChangeBckwd(3)"
       (nextStepEmitter)="onStepChangeFwd($event, 5)"
     ></app-new-trip-name>

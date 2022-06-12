@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { MessagingService } from './messaging.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,19 @@ export class TripService {
   // Get list of all currencies from API
   public getCurrencies(): Observable<any> {
     return this.http.get('https://openexchangerates.org/api/currencies.json');
+  }
+
+  public getTimerValue(date: any): number {
+    const dayDot = moment(date);
+    const currentDate = moment([
+      moment().year(),
+      moment().month(),
+      moment().date(),
+    ]);
+
+    const days = currentDate.diff(dayDot, 'days');
+
+    return Math.abs(days);
   }
 
   public async createNewTrip(data: TripData): Promise<void> {
@@ -128,6 +142,6 @@ export interface TripData {
 export type TripType = 'ROAD' | 'BEACH' | 'SKI' | 'CITY' | 'OTHER';
 export type TripDates = { start: Date | undefined; end: Date | undefined };
 export type TripAllowance = {
-  amount: number | undefined;
-  currency: 'USD' | 'EUR' | 'GBP';
+  amount: number | null;
+  currency: string | null;
 };

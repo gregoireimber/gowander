@@ -18,6 +18,8 @@ export class NewTripCompleteComponent implements OnInit {
   public loading = false;
   public continentString = '';
   public typeString = '';
+  public currencySelectedName: string = '';
+  public tripTimeInDays: number = 0;
 
   constructor(
     private messageService: MessagingService,
@@ -32,22 +34,41 @@ export class NewTripCompleteComponent implements OnInit {
     this.createContinentString();
     this.createTypeString();
 
-    console.log(this.tripData);
+    this.tripService.getCurrencies().subscribe({
+      next: (data) => {
+        if (!this.tripData?.allowance?.currency) {
+          this.currencySelectedName = 'No currency was selected.';
+          return;
+        }
+
+        const currencyIndex = Object.keys(data).findIndex((c) => {
+          return c === this.tripData!.allowance!.currency;
+        });
+
+        this.currencySelectedName = Object.values(data)[
+          currencyIndex
+        ] as string;
+      },
+    });
+
+    this.getTimeToTrip();
+  }
+
+  private getTimeToTrip(): void {
+    this.tripTimeInDays = this.tripService.getTimerValue(
+      this.tripData!.dates!.start
+    );
   }
 
   public goBack(): void {
     this.previousStepEmitter.emit();
   }
 
-  // This is not quite working as expected
   public goNext(): void {
-    console.log('here', this.complete);
     if (this.complete) {
       this.router.navigateByUrl('/dashboard');
       return;
     }
-
-    console.log('i should be here too');
 
     // Save the trip - set loading to true
     this.loading = true;

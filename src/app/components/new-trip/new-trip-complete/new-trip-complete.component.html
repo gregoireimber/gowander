@@ -11,6 +11,18 @@
       <div class="trip-info">
         <p>{{ typeString }} - {{ continentString }}</p>
       </div>
+      <div class="trip-info">
+        <p>From: {{ tripData!.dates!.start | date: "fullDate" }}</p>
+      </div>
+      <div class="trip-info">
+        <p>To: {{ tripData!.dates!.end | date: "fullDate" }}</p>
+      </div>
+      <div class="trip-info" *ngIf="tripData!.allowance?.currency">
+        <p>Your chosen currency is: {{ currencySelectedName }}</p>
+      </div>
+      <div class="trip-info" *ngIf="tripData!.allowance?.amount">
+        <p>Your allowance amount is: {{ tripData!.allowance?.amount }}</p>
+      </div>
     </div>
 
     <div class="actions-container">
@@ -23,8 +35,8 @@
 
   <ng-container *ngIf="complete">
     <h2>
-      Congratulations youre going to {{ continentString }} in ... days ... hours
-      with fireworks
+      Congratulations youre going to {{ continentString }} in
+      {{ tripTimeInDays }} days!
     </h2>
     <img src="../../../../assets/graphics/tick.jpg" class="tick-img" alt="" />
     <div class="finish-button-container">

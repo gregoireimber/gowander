@@ -72,7 +72,6 @@ export class NewTripComponent implements OnInit {
   }
 
   public onStepChangeBckwd(step: number) {
-    console.log('hello');
     this.step = step;
     this.calcProgressBar();
   }

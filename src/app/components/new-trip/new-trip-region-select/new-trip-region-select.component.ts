@@ -3,6 +3,8 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -12,13 +14,16 @@ import { map, startWith } from 'rxjs/operators';
 import { continents, countries } from 'countries-list';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { TripData } from 'src/app/services/trip.service';
 
 @Component({
   selector: 'app-new-trip-region-select',
   templateUrl: './new-trip-region-select.component.html',
   styleUrls: ['./new-trip-region-select.component.scss'],
 })
-export class NewTripRegionSelectComponent {
+export class NewTripRegionSelectComponent implements OnInit {
+  @Input() public tripData: TripData | undefined;
+
   // Component emitters
   @Output() public previousStepEmitter = new EventEmitter<void>();
   @Output() public nextStepEmitter = new EventEmitter<{
@@ -62,6 +67,13 @@ export class NewTripRegionSelectComponent {
       startWith(''),
       map((value: any) => this._filterCountry(value))
     );
+  }
+
+  ngOnInit(): void {
+    if (this.tripData?.countries)
+      this.countriesSelected = this.tripData!.countries;
+    if (this.tripData?.continents)
+      this.continentsSelected = this.tripData!.continents;
   }
 
   public goBack(): void {

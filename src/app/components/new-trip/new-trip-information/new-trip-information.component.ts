@@ -1,6 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { TripAllowance, TripService } from 'src/app/services/trip.service';
+import {
+  TripAllowance,
+  TripData,
+  TripService,
+} from 'src/app/services/trip.service';
 
 @Component({
   selector: 'app-new-trip-information',
@@ -8,6 +12,8 @@ import { TripAllowance, TripService } from 'src/app/services/trip.service';
   styleUrls: ['./new-trip-information.component.scss'],
 })
 export class NewTripInformationComponent implements OnInit {
+  @Input() public tripData: TripData | undefined;
+
   // Component emitters
   @Output() public previousStepEmitter = new EventEmitter<void>();
   @Output() public nextStepEmitter =
@@ -18,7 +24,7 @@ export class NewTripInformationComponent implements OnInit {
   public endDateFormControl = new FormControl(null);
 
   // Allowance
-  public currencySelected: string | undefined = undefined;
+  public currencySelected: string | null = null;
 
   public currencies: { name: 'USD' | 'EUR' | 'GBP'; value: string }[] = [
     { name: 'GBP', value: '£' },
@@ -30,7 +36,7 @@ export class NewTripInformationComponent implements OnInit {
   public allCurrencies: string[] = [];
   public showMoreCurrencies = false;
 
-  public allowanceAmount: number | undefined;
+  public allowanceAmount: number | null = null;
 
   // Reservations
   public reservations = '';
@@ -38,6 +44,19 @@ export class NewTripInformationComponent implements OnInit {
   constructor(private tripService: TripService) {}
 
   ngOnInit(): void {
+    if (this.tripData?.dates?.start)
+      this.startDateFormControl.patchValue(this.tripData?.dates?.start, {
+        emitEvent: false,
+      });
+    if (this.tripData?.dates?.end)
+      this.endDateFormControl.patchValue(this.tripData?.dates?.end, {
+        emitEvent: false,
+      });
+    if (this.tripData?.allowance?.currency)
+      this.currencySelected = this.tripData?.allowance?.currency;
+    if (this.tripData?.allowance?.amount)
+      this.allowanceAmount = this.tripData?.allowance?.amount;
+
     this.tripService.getCurrencies().subscribe({
       next: (data) => {
         this.allCurrencies = Object.keys(data);
@@ -67,7 +86,7 @@ export class NewTripInformationComponent implements OnInit {
 type informationComponentOutput = {
   tripStartDate: Date | undefined;
   tripEndDate: Date | undefined;
-  allowanceAmount: number | undefined;
-  allowanceCurrency: string | undefined;
+  allowanceAmount: number | null;
+  allowanceCurrency: string | null;
   reservations: string;
 };

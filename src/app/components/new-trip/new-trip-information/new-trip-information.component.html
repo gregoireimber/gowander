@@ -33,20 +33,20 @@
   <div class="currency-container">
     <p>Select a Currency:</p>
     <mat-radio-group class="radio-buttons" [(ngModel)]="currencySelected">
-      <mat-radio-button value="'GBP'">GBP £</mat-radio-button>
-      <mat-radio-button value="'EUR'">EUR €</mat-radio-button>
-      <mat-radio-button value="'USD'">USD $</mat-radio-button>
-      <mat-radio-button (click)="showMoreCurrencies = true"
+      <mat-radio-button value="GBP">GBP £</mat-radio-button>
+      <mat-radio-button value="EUR">EUR €</mat-radio-button>
+      <mat-radio-button value="USD">USD $</mat-radio-button>
+      <mat-radio-button value="" (click)="showMoreCurrencies = true"
         >Other</mat-radio-button
       >
+      <div *ngIf="showMoreCurrencies">
+        <select [(ngModel)]="currencySelected">
+          <option *ngFor="let currency of allCurrencies" value="{{ currency }}">
+            {{ currency }}
+          </option>
+        </select>
+      </div>
     </mat-radio-group>
-    <div *ngIf="showMoreCurrencies">
-      <select [(ngModel)]="currencySelected">
-        <option *ngFor="let currency of allCurrencies" value="{{ currency }}">
-          {{ currency }}
-        </option>
-      </select>
-    </div>
   </div>
 
   <div class="allowance-input-container">

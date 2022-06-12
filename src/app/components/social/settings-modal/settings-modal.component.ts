@@ -29,8 +29,6 @@ export class SettingsModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedInUserId = this.authService.getUserId();
-
-    console.log(this.profileData, this.profileData.profilePictureUrl);
   }
 
   // Add a return type

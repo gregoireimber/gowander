@@ -4,21 +4,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-profile-view-modal',
   templateUrl: './profile-view-modal.component.html',
-  styleUrls: ['./profile-view-modal.component.scss']
+  styleUrls: ['./profile-view-modal.component.scss'],
 })
-export class ProfileViewModalComponent implements OnInit {
-
-
+export class ProfileViewModalComponent {
   public profileData: any;
 
-  constructor(private dialogRef: MatDialogRef<ProfileViewModalComponent>, @Inject(MAT_DIALOG_DATA) public data: ProfileViewModalComponentData) {
+  constructor(
+    private dialogRef: MatDialogRef<ProfileViewModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ProfileViewModalComponentData
+  ) {
     this.profileData = data.profileData;
   }
-
-  ngOnInit(): void {
-    console.log(this.profileData);
-  }
-
 }
 
 export interface ProfileViewModalComponentData {
