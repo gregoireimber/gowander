@@ -1,25 +1,35 @@
 <div class="my-trips-card-component-container">
-
-  <div *ngIf="loading"
+  <div
+    *ngIf="loading"
     class="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-black m-auto"
   ></div>
 
-<!-- COuld also add whether the trip is solo or shared with someone else - can find this
+  <!-- COuld also add whether the trip is solo or shared with someone else - can find this
 by the length of the linked users array -->
 
   <ng-container *ngIf="!loading">
     <div class="my-trips-card-container">
-    <mat-card class="my-trips-card" *ngFor="let trip of myTrips; let i = index">
-      <mat-card-title>{{ trip[0].name }}</mat-card-title>
-      <mat-card-subtitle>{{ trip[0].type }} - {{ myTripsContinentString[i] }}</mat-card-subtitle>
-      <mat-card-content>
-        <p *ngFor="let country of trip[0].countries">{{ country }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button (click)="onOpenTrip(i)">Open Trip</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+      <mat-card
+        class="my-trips-card"
+        *ngFor="let trip of myTrips; let i = index"
+      >
+        <mat-card-title class="card-title">
+          {{ trip[0].name }}
+          <button mat-icon-button (click)="deleteTrip(trip)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </mat-card-title>
+        <mat-card-subtitle
+          >{{ trip[0].type }} -
+          {{ myTripsContinentString[i] }}</mat-card-subtitle
+        >
+        <mat-card-content>
+          <p *ngFor="let country of trip[0].countries">{{ country }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="onOpenTrip(i)">Open Trip</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </ng-container>
-
 </div>

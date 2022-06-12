@@ -1,9 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TripService } from 'src/app/services/trip.service';
@@ -50,6 +45,13 @@ export class MyTripsComponent implements OnInit {
       });
 
     this.createContinentString();
+  }
+
+  public deleteTrip(trip: any): void {
+    this.tripService.deleteTrip(trip[1]).then(() => {
+      this.myTrips = [];
+      this.getUserTrips();
+    });
   }
 
   private createContinentString(): void {

@@ -35,6 +35,21 @@ export class TripService {
     return Math.abs(days);
   }
 
+  public async deleteTrip(tripId: string) {
+    const ref = this.db.collection('trips').doc(tripId).ref;
+
+    ref
+      .delete()
+      .then(() => {
+        this.messageServ.emitSuccessMessage('Trip was successfully deleted');
+      })
+      .catch(() => {
+        this.messageServ.emitErrorMessage(
+          'There was an error deleting the trip'
+        );
+      });
+  }
+
   public async createNewTrip(data: TripData): Promise<void> {
     // Add new trip to 'trips' collection
     let newDocId: string = '';
@@ -109,7 +124,11 @@ export class TripService {
           .toPromise();
 
         const data: any = myTripsSnapshot.data();
-        currentUserTripsData.push(Object.values(data));
+
+        if (data) {
+          data.tripId = trip;
+          currentUserTripsData.push(Object.values(data));
+        }
       })
     );
 
