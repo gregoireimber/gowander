@@ -1,7 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TripService } from 'src/app/services/trip.service';
+import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-my-trips',
@@ -20,7 +22,8 @@ export class MyTripsComponent implements OnInit {
   constructor(
     private tripService: TripService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -48,10 +51,19 @@ export class MyTripsComponent implements OnInit {
   }
 
   public deleteTrip(trip: any): void {
-    this.tripService.deleteTrip(trip[1]).then(() => {
-      this.myTrips = [];
-      this.getUserTrips();
-    });
+    this.dialog
+      .open(DeleteConfirmationComponent, { width: '300px', autoFocus: false })
+      .afterClosed()
+      .subscribe({
+        next: (value) => {
+          if (value) {
+            this.tripService.deleteTrip(trip[1]).then(() => {
+              this.myTrips = [];
+              this.getUserTrips();
+            });
+          }
+        },
+      });
   }
 
   private createContinentString(): void {

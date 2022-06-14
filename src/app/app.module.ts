@@ -70,6 +70,7 @@ import { NewTripInformationComponent } from './components/new-trip/new-trip-info
 import { NewTripNameComponent } from './components/new-trip/new-trip-name/new-trip-name.component';
 import { NewTripCompleteComponent } from './components/new-trip/new-trip-complete/new-trip-complete.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+import { DeleteConfirmationComponent } from './components/my-trips/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { ComingSoonComponent } from './components/coming-soon/coming-soon.compon
     NewTripNameComponent,
     NewTripCompleteComponent,
     ComingSoonComponent,
+    DeleteConfirmationComponent,
   ],
   imports: [
     BrowserModule,
