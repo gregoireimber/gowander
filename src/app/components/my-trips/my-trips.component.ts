@@ -74,11 +74,11 @@ export class MyTripsComponent implements OnInit {
     });
   }
 
-  public onOpenTrip(index: number): void {
-    const tripToEmit = [
-      this.myTrips[index],
-      this.myTripsContinentString[index],
-    ];
-    this.tripSelected.emit(tripToEmit);
+  public onViewTrip(trip: any): void {
+    const tripId = trip[1];
+
+    this.router.navigate([`/view/${tripId}`]);
+
+    console.log(tripId);
   }
 }

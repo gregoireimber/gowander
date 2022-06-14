@@ -50,6 +50,10 @@ export class TripService {
       });
   }
 
+  public getTrip(tripId: string) {
+    return this.db.collection('trips').doc(tripId).get().toPromise();
+  }
+
   public async createNewTrip(data: TripData): Promise<void> {
     // Add new trip to 'trips' collection
     let newDocId: string = '';

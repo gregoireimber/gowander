@@ -20,6 +20,16 @@ $desktop-width: 1024px;
   align-items: center;
 }
 
+.card-subtitle {
+  margin-bottom: 0.5rem;
+}
+
+.view-trip-btn {
+  margin: auto;
+  width: 95%;
+  margin-bottom: 0.5rem;
+}
+
 // Tablet
 @media (max-width: #{$desktop-width - 1px}) {
   .my-trips-component-card-container {

@@ -8,6 +8,7 @@ import { SocialComponent } from './components/social/social.component';
 import { ExploreComponent } from './components/explore/explore.component';
 import { NewTripComponent } from './components/new-trip/new-trip.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: 'coming-soon',
     component: ComingSoonComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'view/:tripId',
+    component: TripDetailComponent,
     canActivate: [AuthGuard],
   },
 ];

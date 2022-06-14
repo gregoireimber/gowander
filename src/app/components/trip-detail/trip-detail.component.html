@@ -1,10 +1,14 @@
+<app-navbar></app-navbar>
+
 <div class="trip-detail-container">
-  <div class="left-column">
-    <div class="name-container">
-      <h3>{{ trip.name }}</h3>
-      <p>{{ continentString }}</p>
-    </div>
+  <div class="trip-detail-header">
+    <button mat-icon-button (click)="backToDashboard()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ tripData?.name }}</h2>
   </div>
 
-  <div class="right-column"></div>
+  <div class="trip-detail-body">
+    <p>{{ tripData?.continents }}</p>
+  </div>
 </div>
