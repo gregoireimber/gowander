@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TripData, TripService } from '../../services/trip.service';
 import { MessagingService } from 'src/app/services/messaging.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-trip',
@@ -13,13 +14,33 @@ export class NewTripComponent implements OnInit {
   public stepData: TripData = {};
   public progressValue = 0;
 
+  public isEdit = false;
+
   constructor(
-    private authService: AuthService,
-    private tripService: TripService,
-    private messageService: MessagingService
+    private messageService: MessagingService,
+    private route: ActivatedRoute,
+    private tripService: TripService
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe({
+      next: (params) => {
+        this.isEdit = !!params['tripId'];
+
+        if (this.isEdit) {
+          this.step = 2;
+          this.tripService.getTrip(params['tripId']).then((snapshot) => {
+            const data: { data: any } = snapshot.data() as {
+              data: any;
+            };
+            const rawData = data.data;
+            rawData.dates.end = new Date(rawData.dates.end.seconds * 1000);
+            rawData.dates.start = new Date(rawData.dates.start.seconds * 1000);
+            this.stepData = rawData as TripData;
+          });
+        }
+      },
+    });
     this.calcProgressBar();
   }
 
@@ -75,23 +96,4 @@ export class NewTripComponent implements OnInit {
     this.step = step;
     this.calcProgressBar();
   }
-
-  // public submitForm(): void {
-  // get the logged in user as the default value for linkedUsers
-  // Should never be null because can only get here if someone is logged in
-  // const loggedInUser = this.authService.getUserId() ?? 'null';
-
-  // THis will need to be changed
-  // const tripData: TripData = {
-  //   name: this.stepOneGroup.controls['tripName'].value,
-  //   type: 'ROAD',
-  //   continents: this.continentsSelected,
-  //   countries: this.countriesSelected,
-  //   linkedUsers: [loggedInUser],
-  // };
-  // console.log(this.countriesSelected, this.continentsSelected);
-
-  // this.tripService.createNewTrip(tripData);
-  // this.dialogRef.close();
-  // }
 }

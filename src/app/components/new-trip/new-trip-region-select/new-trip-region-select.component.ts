@@ -4,8 +4,10 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -21,7 +23,7 @@ import { TripData } from 'src/app/services/trip.service';
   templateUrl: './new-trip-region-select.component.html',
   styleUrls: ['./new-trip-region-select.component.scss'],
 })
-export class NewTripRegionSelectComponent implements OnInit {
+export class NewTripRegionSelectComponent implements OnInit, OnChanges {
   @Input() public tripData: TripData | undefined;
 
   // Component emitters
@@ -74,6 +76,15 @@ export class NewTripRegionSelectComponent implements OnInit {
       this.countriesSelected = this.tripData!.countries;
     if (this.tripData?.continents)
       this.continentsSelected = this.tripData!.continents;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.tripData.currentValue) {
+      if (this.tripData?.countries)
+        this.countriesSelected = this.tripData!.countries;
+      if (this.tripData?.continents)
+        this.continentsSelected = this.tripData!.continents;
+    }
   }
 
   public goBack(): void {

@@ -76,9 +76,6 @@ export class MyTripsComponent implements OnInit {
 
   public onViewTrip(trip: any): void {
     const tripId = trip[1];
-
     this.router.navigate([`/view/${tripId}`]);
-
-    console.log(tripId);
   }
 }

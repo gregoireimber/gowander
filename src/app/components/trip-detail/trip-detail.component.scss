@@ -1,2 +1,78 @@
+// Define breakpoints
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+h2 {
+  margin: 0;
+}
+
 .trip-detail-container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .trip-detail-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .trip-detail-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .trip-detail-body {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    h3,
+    p {
+      margin: 0;
+    }
+
+    .trip-time {
+      padding-left: 0.5rem;
+    }
+
+    .dates-container {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+      gap: 5px;
+    }
+
+    .allowance-container {
+      h3 {
+        margin-bottom: 5px;
+      }
+      padding: 0.5rem;
+    }
+
+    .continent-country {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 0.5rem;
+      border-radius: 5px;
+    }
+  }
+}
+
+// Phone
+@media (max-width: #{$tablet-width - 1px}) {
+  .trip-detail-container {
+    .trip-detail-body {
+      flex-direction: column;
+    }
+  }
+}
+
+// Tablet
+@media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+}
+
+// Large screen
+@media (min-width: #{$desktop-width}) {
 }

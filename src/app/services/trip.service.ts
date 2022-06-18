@@ -147,6 +147,8 @@ export class TripService {
 
     return currentUserTripsData;
   }
+
+  public updateTrip(tripId: string, data: TripData): any {}
 }
 
 export interface TripData {

@@ -22,7 +22,16 @@ const routes: Routes = [
   },
   { path: 'social', component: SocialComponent, canActivate: [AuthGuard] },
   { path: 'explore', component: ExploreComponent, canActivate: [AuthGuard] },
-  { path: 'new-trip', component: NewTripComponent, canActivate: [AuthGuard] },
+  {
+    path: 'new-trip',
+    component: NewTripComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'new-trip/:tripId',
+    component: NewTripComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'coming-soon',
     component: ComingSoonComponent,

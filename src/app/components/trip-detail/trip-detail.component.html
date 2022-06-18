@@ -9,6 +9,40 @@
   </div>
 
   <div class="trip-detail-body">
-    <p>{{ tripData?.continents }}</p>
+    <h3 *ngIf="timeToTripInDays > 0; else pastTrip" class="trip-time">
+      You are leaving in {{ timeToTripInDays }} days!
+    </h3>
+    <ng-template #pastTrip>
+      <h3 class="trip-time">The start date of this trip has passed!</h3>
+    </ng-template>
+    <div
+      class="continent-country"
+      *ngFor="let countryContinent of countryContinentData"
+    >
+      <h3>{{ countryContinent[0].continentName }}</h3>
+      <ng-container *ngFor="let countryCont of countryContinent; let i = index">
+        <p>{{ countryContinent[i].country }} {{ countryContinent[i].emoji }}</p>
+      </ng-container>
+    </div>
+
+    <div class="dates-container">
+      <h3>Dates</h3>
+      <p>Leaving: {{ tripData?.dates?.start | date: "dd/MM/yyyy" }}</p>
+      <p>Returning: {{ tripData?.dates?.end | date: "dd/MM/yyyy" }}</p>
+    </div>
+
+    <div
+      class="allowance-container"
+      *ngIf="tripData?.allowance?.amount && tripData?.allowance?.currency"
+    >
+      <h3>Allowance</h3>
+      <p>
+        {{ tripData?.allowance?.amount }} {{ tripData?.allowance?.currency }}
+      </p>
+    </div>
+  </div>
+
+  <div class="trip-detail-actions">
+    <button class="gw-button primary" (click)="onEditTrip()">Edit</button>
   </div>
 </div>
