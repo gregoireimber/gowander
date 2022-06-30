@@ -48,13 +48,7 @@
       <button mat-flat-button color="dark-blue" (click)="onLogIn()">
         <div class="login-loading" *ngIf="loading; else loginText">
           <div
-            class="
-              animate-spin
-              rounded-full
-              h-7
-              w-7
-              border-t-4 border-b-4 border-white
-            "
+            class="animate-spin rounded-full h-7 w-7 border-t-4 border-b-4 border-white"
           ></div>
         </div>
         <ng-template #loginText>LOG IN</ng-template>
@@ -116,11 +110,11 @@
           <input type="username" matInput [formControl]="usernameFormControl" />
           <mat-error
             *ngIf="
-            usernameFormControl.hasError('minlength') &&
+              usernameFormControl.hasError('minlength') &&
               !usernameFormControl.hasError('required')
             "
           >
-            Password needs at least <strong>3 characters</strong>
+            Username needs at least <strong>3 characters</strong>
           </mat-error>
           <mat-error *ngIf="usernameFormControl.hasError('required')">
             Username is <strong>required</strong>
@@ -150,15 +144,7 @@
           <ng-template *ngIf="loading; else loginText">
             <div class="login-loading">
               <div
-                class="
-                  rounded
-                  animate-spin
-                  ease
-                  duration-300
-                  w-5
-                  h-5
-                  border-2 border-white
-                "
+                class="rounded animate-spin ease duration-300 w-5 h-5 border-2 border-white"
               ></div>
             </div>
           </ng-template>
@@ -172,7 +158,8 @@
     </div>
   </ng-template>
 
-  <div class="bg-img-cont" *ngIf="!isMobile">
+  <!-- This is the background image: -->
+  <!-- <div class="bg-img-cont" *ngIf="!isMobile">
     <img
       class="background-image"
       src="../../assets/images/luca-bravo-O453M2Liufs-unsplash.jpg"
@@ -186,5 +173,5 @@
       src="../../assets/images/luca-bravo-O453M2Liufs-unsplash-portrait.jpg"
       alt=""
     />
-  </div>
+  </div> -->
 </div>

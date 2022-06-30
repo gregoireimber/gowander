@@ -41,6 +41,8 @@
     <app-new-trip-complete
       *ngIf="step === 5"
       [tripData]="stepData"
+      [isEdit]="isEdit"
+      [tripId]="tripId"
       (previousStepEmitter)="onStepChangeBckwd(4)"
       (nextStepEmitter)="onStepChangeFwd($event, 6)"
     ></app-new-trip-complete>

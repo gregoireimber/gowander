@@ -10,6 +10,8 @@ import { TripData, TripService } from 'src/app/services/trip.service';
 })
 export class NewTripCompleteComponent implements OnInit {
   @Input() public tripData: TripData | undefined;
+  @Input() public isEdit = false;
+  @Input() public tripId: string = '';
 
   @Output() public previousStepEmitter = new EventEmitter<void>();
   @Output() public nextStepEmitter = new EventEmitter<string>();
@@ -73,12 +75,20 @@ export class NewTripCompleteComponent implements OnInit {
     // Save the trip - set loading to true
     this.loading = true;
     if (this.tripData) {
-      this.tripService.createNewTrip(this.tripData).then(() => {
-        // Set loading to false and complete to true
-        this.loading = false;
-        this.complete = true;
-        return;
-      });
+      if (this.isEdit) {
+        this.tripService.updateTrip(this.tripId, this.tripData).then(() => {
+          this.loading = false;
+          this.complete = true;
+          return;
+        });
+      } else {
+        this.tripService.createNewTrip(this.tripData).then(() => {
+          // Set loading to false and complete to true
+          this.loading = false;
+          this.complete = true;
+          return;
+        });
+      }
     }
   }
 

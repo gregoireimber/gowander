@@ -15,6 +15,7 @@ export class NewTripComponent implements OnInit {
   public progressValue = 0;
 
   public isEdit = false;
+  public tripId: string = '';
 
   constructor(
     private messageService: MessagingService,
@@ -26,9 +27,12 @@ export class NewTripComponent implements OnInit {
     this.route.params.subscribe({
       next: (params) => {
         this.isEdit = !!params['tripId'];
+        this.tripId = params['tripId'];
 
         if (this.isEdit) {
-          this.step = 2;
+          // This would set the step to 2 if we edit
+          // this.step = 2;
+
           this.tripService.getTrip(params['tripId']).then((snapshot) => {
             const data: { data: any } = snapshot.data() as {
               data: any;

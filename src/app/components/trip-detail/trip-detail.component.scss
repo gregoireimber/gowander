@@ -21,12 +21,17 @@ h2 {
   .trip-detail-actions {
     display: flex;
     justify-content: flex-end;
+    width: 800px;
+    margin: 0 auto;
   }
 
   .trip-detail-body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 1rem;
+    width: 800px;
+    margin: 0 auto;
+
     h3,
     p {
       margin: 0;
@@ -64,13 +69,30 @@ h2 {
 @media (max-width: #{$tablet-width - 1px}) {
   .trip-detail-container {
     .trip-detail-body {
-      flex-direction: column;
+      width: unset;
+      margin: unset;
+    }
+
+    .trip-detail-actions {
+      width: unset;
+      margin: unset;
     }
   }
 }
 
 // Tablet
 @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+  .trip-detail-container {
+    .trip-detail-body {
+      width: unset;
+      margin: unset;
+    }
+
+    .trip-detail-actions {
+      width: unset;
+      margin: unset;
+    }
+  }
 }
 
 // Large screen

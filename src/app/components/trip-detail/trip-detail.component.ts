@@ -41,7 +41,6 @@ export class TripDetailComponent implements OnInit {
           this.tripData = rawData as TripData;
           this.createContinentCountryRelationship();
           this.getTimeToTrip();
-          console.log(this.tripData);
         });
 
         if (!this.tripId) {

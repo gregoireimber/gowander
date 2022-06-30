@@ -114,6 +114,9 @@ export class TripService {
       .get()
       .toPromise();
     const userData: any = userSnapshot.data();
+
+    if (!userData) return;
+
     currentUserTrips = userData.trips;
 
     // Return the data for each of the user trips
@@ -148,7 +151,20 @@ export class TripService {
     return currentUserTripsData;
   }
 
-  public updateTrip(tripId: string, data: TripData): any {}
+  public async updateTrip(tripId: string, data: TripData): Promise<void> {
+    await this.db
+      .collection('trips')
+      .doc(tripId)
+      .update({ data })
+      .then(() => {
+        this.messageServ.emitSuccessMessage('Trip successfully updated.');
+      })
+      .catch(() => {
+        this.messageServ.emitErrorMessage(
+          'There was an error updating the trip.'
+        );
+      });
+  }
 }
 
 export interface TripData {
