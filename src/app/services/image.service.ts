@@ -29,6 +29,8 @@ export class ImageService {
 
     const urlResult = await this.http.get(url).toPromise();
 
+    console.log('result', urlResult);
+
     // This is where the result object is
     return Object.entries(urlResult)[2][1];
   }
